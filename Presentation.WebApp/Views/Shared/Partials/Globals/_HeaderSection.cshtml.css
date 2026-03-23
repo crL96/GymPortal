@@ -1,0 +1,25 @@
+.header-section {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+  align-items: center;
+  font-size: 1rem;
+
+  .logotype {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .main-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .account-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
