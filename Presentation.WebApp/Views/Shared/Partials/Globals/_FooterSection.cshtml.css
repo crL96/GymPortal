@@ -1,0 +1,44 @@
+.footer-section {
+  padding: 1rem 2rem 0;
+  * {
+    color: var(--text-accent-color);
+  }
+}
+
+.footer-top,
+.footer-middle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+h3,
+.hours {
+  text-align: end;
+}
+
+h3 {
+  margin: 0;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+.address {
+  font-size: 0.9rem;
+}
+
+.time {
+  margin: 0;
+}
+
+.hours > h4 {
+  margin: 1.5rem 0;
+}
+
+.copyright {
+  text-align: center;
+}

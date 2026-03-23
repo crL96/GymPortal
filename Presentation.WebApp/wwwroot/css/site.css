@@ -197,8 +197,23 @@ header {
   display: flex;
   align-items: center;
   background-color: var(--section-accent-background-color);
+  background-image: url("/images/dark-section-img.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: var(--text-accent-color);
   border-radius: 20px;
   padding: 1rem 2rem 1rem;
   min-height: 80px;
+}
+
+footer {
+  background-color: var(--section-accent-background-color);
+  background-image: url("/images/dark-section-img.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text-accent-color);
+  border-radius: 20px;
+  padding: 1rem 2rem 1rem;
 }
