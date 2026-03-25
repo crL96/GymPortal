@@ -1,0 +1,118 @@
+/* hero section */
+.section__hero {
+  padding: 1rem 0rem 0;
+  width: 100%;
+
+  .container {
+    margin-top: 2rem;
+
+    @media (width >= 768px) {
+      margin-top: 3rem;
+    }
+
+    @media (width >= 1200px) {
+      margin-top: 4rem;
+    }
+  }
+
+  hr {
+    margin: 0;
+  }
+
+  .hero-area {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "image" "title " "description" "checklist" "hr " "cta";
+    align-items: end;
+    row-gap: 1rem;
+    text-align: center;
+    justify-content: center;
+
+    @media (width >= 768px) {
+      column-gap: 3rem;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "title title" "description description" "hr hr" "checklist image" "cta image";
+    }
+
+    @media (width >= 1200px) {
+      text-align: left;
+      grid-template-areas: "title image" "description image" "checklist image" "hr image" "cta image";
+    }
+
+    .title {
+      grid-area: title;
+
+      h1 {
+        color: var(--section-title-text-color);
+        font-weight: 700;
+        font-size: 2.375rem;
+        line-height: 40px;
+
+        @media (width >= 768px) {
+          font-size: 3rem;
+          line-height: 3.75rem;
+        }
+
+        @media (width >= 1200px) {
+          font-size: 3.375rem;
+          line-height: 4rem;
+        }
+      }
+    }
+
+    .description {
+      grid-area: description;
+    }
+
+    .check-list {
+      grid-area: checklist;
+
+      display: grid;
+      grid-template-columns: 1fr;
+      margin: 0 2rem;
+      text-align: left;
+
+      @media (width >= 768px) {
+        margin: 0;
+      }
+
+      @media (width >= 1200px) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    hr {
+      grid-area: hr;
+      display: block;
+      margin: 1.5rem 0;
+      opacity: 0.05;
+
+      @media (width >= 768px) {
+        margin: 0.5rem 0;
+      }
+
+      @media (width >= 1200px) {
+        margin: 2rem 0;
+      }
+    }
+
+    .cta-btn {
+      grid-area: cta;
+      margin-bottom: 2rem;
+      display: grid;
+
+      @media (width >= 768px) {
+        margin-bottom: 4rem;
+      }
+
+      @media (width >= 1200px) {
+        display: flex;
+        margin-bottom: 6rem;
+      }
+    }
+
+    .hero-image {
+      grid-area: image;
+    }
+  }
+}

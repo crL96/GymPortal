@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/css/fonts.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Presentation.WebApp.styles.css" asp-append-version="true" />
 </head>
 
@@ -23,6 +24,7 @@
     <div class="app-layout">
         <header>
             <partial name="Partials/Globals/_HeaderSection" />
+            @await RenderSectionAsync("Hero", required: false)
         </header>
         <main>
             @RenderBody()
