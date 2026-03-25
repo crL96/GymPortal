@@ -8,14 +8,20 @@
 .footer-top,
 .footer-middle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
+  text-align: center;
   gap: 2rem;
-}
 
-h3,
-.hours {
-  text-align: end;
+  @media (width >= 992px) {
+    grid-template-columns: 1fr 1fr;
+    text-align: start;
+
+    h3,
+    .hours {
+      text-align: end;
+    }
+  }
 }
 
 h3 {

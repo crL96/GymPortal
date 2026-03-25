@@ -123,10 +123,10 @@ hr {
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 
   .menu-item {
-    font-size: 1.125em;
+    font-size: 1rem;
 
     &.menu-dropdown::after {
       content: "\f078";
@@ -149,7 +149,7 @@ hr {
 }
 
 /* buttons */
-button,
+mobile-btn,
 .btn {
   color: var(--button-text-color);
   background-color: var(--button-background-color);
@@ -178,6 +178,21 @@ button,
     color: var(--button-text-hover-color);
     background-color: var(--button-background-hover-color);
     border: 1px solid var(--button-border-hover-color);
+  }
+}
+
+.mobile-btn {
+  padding: 0.8rem 0.8rem;
+  border-radius: 10px;
+  height: 50px;
+  width: 50px;
+
+  &::after {
+    content: "\f0c9";
+    font-family: var(--font-fa);
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-left: 0rem;
   }
 }
 
