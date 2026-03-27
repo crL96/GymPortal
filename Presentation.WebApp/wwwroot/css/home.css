@@ -189,20 +189,22 @@
   }
 }
 
-/* our-program section */
-.section__our-programs {
+/* our-program section  & our-store section */
+.section__our-programs,
+.section__our-store {
   background-color: var(--section-background-color);
   border-radius: 20px;
   padding: 5rem 0;
   margin: 1.5rem 0;
 
-  .our-program-area {
+  .our-program-area,
+  .our-store-area {
     display: grid;
     gap: 2rem;
     text-align: center;
   }
 
-  .program-slider {
+  .slider {
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -233,5 +235,11 @@
         display: inline;
       }
     }
+  }
+}
+
+.section__our-store .slider {
+  @media (width >= 768px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
