@@ -149,3 +149,42 @@
     }
   }
 }
+
+/* about-us section */
+.section__about-us {
+  text-align: center;
+  margin: 6rem 0;
+
+  @media (width >= 992px) {
+    text-align: left;
+  }
+
+  .about-us-area {
+    display: flex;
+    gap: 2rem;
+
+    .about-us-image {
+      display: none;
+
+      @media (width >= 992px) {
+        display: block;
+        width: 50%;
+      }
+
+      @media (width >= 1200px) {
+        width: auto;
+      }
+    }
+
+    .about-us-content {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @media (width >= 992px) {
+        align-items: start;
+      }
+    }
+  }
+}
