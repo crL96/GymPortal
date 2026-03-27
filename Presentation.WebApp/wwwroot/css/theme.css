@@ -27,6 +27,8 @@
   --border-color: var(--gray-color);
   --border-accent-color: var(--theme-color);
 
+  --checklist-icon-color: var(--theme-color);
+
   --link-color: var(--dark-color);
   --link-hover-color: var(--theme-color);
   --link-accent-color: var(--theme-color);
@@ -58,4 +60,10 @@
 
   --tooltip-background-color: var(--dark-color);
   --tooltip-text-color: var(--white-color);
+
+  --section-title-background-color: var(--dark-color);
+  --section-title-text-color: var(--white-color);
+  --section-title-dot-color: var(--theme-color);
+
+  --brands-background-color: var(--theme-color);
 }
