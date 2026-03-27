@@ -64,4 +64,6 @@
   --section-title-background-color: var(--dark-color);
   --section-title-text-color: var(--white-color);
   --section-title-dot-color: var(--theme-color);
+
+  --brands-background-color: var(--theme-color);
 }
