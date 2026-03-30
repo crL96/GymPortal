@@ -252,6 +252,11 @@ footer {
   padding: 1rem 2rem 1rem;
 }
 
+.page-title {
+  text-align: center;
+  margin: 3rem 0;
+}
+
 .check-list {
   list-style: none;
   padding: 0;

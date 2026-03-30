@@ -1,4 +1,8 @@
+using Presentation.WebApp.Placeholders;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IFaqService, FaqService>();
 
 builder.Services.AddControllersWithViews();
 
