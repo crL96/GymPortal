@@ -1,0 +1,125 @@
+/* faq section */
+.section__faq {
+  padding: 1rem 0;
+  margin: 5rem 0;
+
+  .faq-area {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+    grid-template-columns: 1fr;
+    grid-template-areas: "title" "faq";
+    grid-template-rows: auto 1fr;
+
+    @media (width >= 1200px) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "image title" "image faq";
+    }
+
+    .title {
+      grid-area: title;
+      text-align: center;
+
+      @media (width >= 1200px) {
+        text-align: left;
+      }
+    }
+
+    img {
+      grid-area: image;
+      display: none;
+
+      @media (width >= 1200px) {
+        display: block;
+      }
+    }
+
+    .accordion {
+      grid-area: faq;
+    }
+  }
+}
+
+.accordion {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .accordion-item {
+    display: grid;
+    grid-template-rows: auto 0fr;
+    transition: grid-template-rows 0.2s ease;
+    height: 100%;
+
+    &.is-open {
+      grid-template-rows: auto 1fr;
+    }
+  }
+
+  .accordion-item:not(:first-child) {
+    border-top: 1px solid var(--gray-color);
+  }
+
+  .accordion-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .accordion-trigger {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 0;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    height: 100%;
+
+    &:hover::after {
+      background-color: var(--dark-color);
+      color: var(--white-color);
+    }
+
+    &:focus-visible {
+      outline-offset: -3px;
+    }
+
+    &::after {
+      content: "\f078";
+      font-family: var(--font-fa);
+      font-weight: 900;
+      font-size: 0.8rem;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: 1;
+      background-color: var(--theme-color);
+      padding: 0.7rem;
+      border-radius: 100%;
+      transition:
+        background-color 0.1s ease,
+        color 0.1s ease,
+        transform 0.1s ease;
+    }
+  }
+
+  .accordion-trigger[aria-expanded="true"]::after {
+    content: "\f077";
+    background-color: var(--dark-color);
+    color: var(--white-color);
+  }
+
+  .accordion-panel {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .accordion-content {
+    padding: 0 1.25rem 1.25rem;
+    font-size: 0.8em;
+  }
+}
