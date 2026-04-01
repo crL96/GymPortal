@@ -51,12 +51,15 @@
   --button-accent-border-color: var(--theme-color);
   --button-accent-border-hover-color: var(--white-color);
 
-  --input-text-color: var(--dark-color);
-  --input-placeholder-color: var(--gray-color);
-  --input-background-color: var(--light-color);
-  --input-border-color: var(--light-color);
-  --input-checked-color: var(--theme-color);
-  --input-error-text-color: var(--danger-color);
+  --form-label-text-color: var(--dark-color);
+  --form-input-text-color: var(--dark-color);
+  --form-input-border-color: var(--light-color);
+  --form-input-background-color: var(--light-color);
+  --form-input-border-focus-color: var(--dark-gray-color);
+  --form-field-validation-error-text-color: var(--danger-color);
+  --form-title-paragraph-color: var(--gray-color);
+  --form-checkbox-checked-background-color: var(--theme-color);
+  --form-checkbox-border-color: var(--dark-color);
 
   --tooltip-background-color: var(--dark-color);
   --tooltip-text-color: var(--white-color);

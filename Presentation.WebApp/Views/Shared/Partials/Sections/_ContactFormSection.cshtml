@@ -1,0 +1,83 @@
+﻿@using Presentation.WebApp.Models.Support
+@model ContactForm
+
+<section class="section__contact-form">
+    <div class="container">
+        <div class="contact-form-area">
+            <div class="image-container">
+                <img class="contact-form-image" src="~/images/contact-us-image.png"
+                     alt="Woman working out at the gym" />
+                <div class="image-overlay">
+                    <div class="contact-item">
+                        <div class="contact-item-icon-container"><span class="contact-item-icon phone"></span></div>
+                        <span class="contact-item-title">Phone Number</span>
+                        <span class="contact-item-value">+(46) 8 410 521 00</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon-container"><span class="contact-item-icon email"></span></div>
+                        <span class="contact-item-title">Email Address</span>
+                        <span class="contact-item-value">info@corefitness.se</span>
+                    </div>
+                </div>
+            </div>
+            <form id="contact-form" method="post" asp-action="Index" asp-controller="Support" novalidate>
+                <div data-type="title" class="title">
+                    <h3>Contact Us Today</h3>
+                    <p>Ready to begin your fitness journey? Contact GymPro today and let our expert trainers guide you
+                        with
+                        the
+                        right program and support.
+                    </p>
+                </div>
+                <div data-type="firstname" class="form-group">
+                    <label class="form-label" asp-for="FirstName"></label>
+                    <div class="form-input-validation">
+                        <input class="form-input" asp-for="FirstName" />
+                        <span class="field-validation" asp-validation-for="FirstName"></span>
+                    </div>
+                </div>
+                <div data-type="lastname" class="form-group">
+                    <label class="form-label" asp-for="LastName"></label>
+                    <div class="form-input-validation">
+                        <input class="form-input" asp-for="LastName" />
+                        <span class="field-validation" asp-validation-for="LastName"></span>
+                    </div>
+                </div>
+                <div data-type="email" class="form-group">
+                    <label class="form-label" asp-for="Email"></label>
+                    <div class="form-input-validation">
+                        <input class="form-input" asp-for="Email" />
+                        <span class="field-validation" asp-validation-for="Email"></span>
+                    </div>
+                </div>
+                <div data-type="phone" class="form-group">
+                    <label class="form-label" asp-for="Phone"></label>
+                    <div class="form-input-validation">
+                        <input class="form-input" asp-for="Phone" />
+                        <span class="field-validation" asp-validation-for="Phone"></span>
+                    </div>
+                </div>
+                <div data-type="message" class="form-group">
+                    <label class="form-label" asp-for="Message"></label>
+                    <div class="form-input-validation">
+                        <textarea class="form-textarea" asp-for="Message" rows="4"></textarea>
+                        <span class="field-validation" asp-validation-for="Message"></span>
+                    </div>
+                </div>
+                <div data-type="terms" class="form-group checkbox">
+                    <div class="form-checkbox-validation">
+                        <label class="form-checkbox-label">
+                            <input class="form-checkbox-input" asp-for="AcceptSavePersonalInformation" />
+                            <span class="form-checkbox-checkmark"></span>
+                            <label class="checkbox-label" asp-for="AcceptSavePersonalInformation"></label>
+                        </label>
+                        <span class="field-validation" asp-validation-for="AcceptSavePersonalInformation"></span>
+                    </div>
+                </div>
+                <div data-type="submit-button">
+                    <button class="btn" type="submit">Submit Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

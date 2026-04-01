@@ -1,0 +1,138 @@
+.section__contact-form {
+  margin-bottom: 6rem;
+
+  .contact-form-area {
+    border-radius: 20px;
+    background-color: var(--section-background-color);
+    display: grid;
+    align-items: start;
+    grid-template-columns: 1fr;
+
+    @media (width >= 1200px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .image-container {
+      position: relative;
+      height: 100%;
+
+      display: none;
+
+      @media (width >= 1200px) {
+        display: block;
+      }
+    }
+
+    .contact-form-image {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .image-overlay {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      right: 2rem;
+      margin: auto;
+      z-index: 10;
+      background-color: rgba(75, 75, 75, 0.568);
+      backdrop-filter: blur(15px);
+      padding: 2rem;
+      border-radius: 20px;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+
+      .contact-item {
+        display: grid;
+        align-items: center;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+        column-gap: 0.5rem;
+      }
+
+      .contact-item-icon-container {
+        grid-row: span 2;
+        font-family: var(--font-fa);
+        font-size: 1.5rem;
+        background-color: var(--theme-color);
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .email.contact-item-icon::after {
+        content: "\f0e0";
+      }
+
+      .phone.contact-item-icon::after {
+        content: "\f2a0";
+      }
+
+      .contact-item-title {
+        font-size: 1.25rem;
+        font-family: var(--font-heading);
+        color: var(--white-color);
+      }
+
+      .contact-item-value {
+        color: var(--white-color);
+      }
+    }
+
+    #contact-form {
+      display: grid;
+      align-items: start;
+      column-gap: 1rem;
+      row-gap: 1.5rem;
+      grid-template-columns: 1fr;
+      grid-template-areas: "title" "firstname" "lastname" "email" "phone" "message" "terms" "submit";
+      margin: 2rem;
+
+      @media (width >= 768px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "title title" "firstname lastname" "email phone" "message message" "terms terms" "submit submit";
+        margin: 3rem 5rem;
+      }
+    }
+
+    [data-type="title"] {
+      grid-area: title;
+    }
+
+    [data-type="firstname"] {
+      grid-area: firstname;
+    }
+
+    [data-type="lastname"] {
+      grid-area: lastname;
+    }
+
+    [data-type="email"] {
+      grid-area: email;
+    }
+
+    [data-type="phone"] {
+      grid-area: phone;
+    }
+
+    [data-type="message"] {
+      grid-area: message;
+    }
+
+    [data-type="terms"] {
+      grid-area: terms;
+    }
+
+    [data-type="submit-button"] {
+      grid-area: submit;
+    }
+  }
+}
