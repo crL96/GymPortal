@@ -9,10 +9,12 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Models\Support\" />
     <Folder Include="Placeholders\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Memberships\" />
     <Folder Include="Views\Shared\Layouts\" />
+    <Folder Include="Views\Support\" />
   </ItemGroup>
 
   <ItemGroup>
