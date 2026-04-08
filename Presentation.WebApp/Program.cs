@@ -1,4 +1,5 @@
 using Application.Extensions;
+using Infrastructure.Data;
 using Infrastructure.Extensions;
 using Presentation.WebApp.Placeholders;
 
@@ -26,5 +27,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+await InfrastructureInitializer.InitializeAsync(app.Services, app.Configuration, app.Environment);
 
 app.Run();
