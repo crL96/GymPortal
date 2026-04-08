@@ -1,6 +1,11 @@
+using Application.Extensions;
+using Infrastructure.Extensions;
 using Presentation.WebApp.Placeholders;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplication(builder.Configuration, builder.Environment);
+builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
 
 builder.Services.AddScoped<IFaqService, FaqService>();
 
