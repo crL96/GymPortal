@@ -29,6 +29,7 @@
     <Folder Include="Data\" />
     <Folder Include="Extensions\" />
     <Folder Include="Identity\" />
+    <Folder Include="Identity\Services\" />
     <Folder Include="Persistence\Configurations\" />
     <Folder Include="Persistence\Migrations\" />
     <Folder Include="Persistence\Repositories\" />
