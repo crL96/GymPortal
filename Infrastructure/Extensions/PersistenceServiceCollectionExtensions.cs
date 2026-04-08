@@ -1,3 +1,6 @@
+using Infrastructure.Persistence.Contexts;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +13,30 @@ public static class PersistenceServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(configuration);
         ArgumentNullException.ThrowIfNull(env);
+
+        if (env.IsDevelopment())
+        {
+            Console.WriteLine("Using development database");
+
+            services.AddSingleton<SqliteConnection>(_ =>
+            {
+                var conn = new SqliteConnection(configuration.GetConnectionString("SqlConnection"));
+                conn.Open();
+                return conn;
+            });
+
+            services.AddDbContext<ApplicationDbContext>((sp, options) =>
+            {
+                var conn = sp.GetRequiredService<SqliteConnection>();
+                options.UseSqlite(conn);
+            });
+        }
+        else
+        {
+            Console.WriteLine("Using production database");
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
+        }
 
         return services;
     }
