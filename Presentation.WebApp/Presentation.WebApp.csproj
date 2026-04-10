@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Authentication\Models\" />
+    <Folder Include="Areas\Authentication\Views\SignIn\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="Models\Support\" />
