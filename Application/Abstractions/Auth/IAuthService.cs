@@ -1,0 +1,10 @@
+using Application.Dtos.Auth;
+
+namespace Application.Abstractions.Auth;
+
+public interface IAuthService
+{
+    Task<AuthResult> SignInUserAsync(string email, string password, bool rememberMe = false);
+    Task<AuthResult> SignUpUserAsync(string email, string password, string? roleName = null);
+    Task SignOutUserAsync();
+}

@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Abstractions\" />
+    <Folder Include="Abstractions\Auth\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Dtos\Auth\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
 

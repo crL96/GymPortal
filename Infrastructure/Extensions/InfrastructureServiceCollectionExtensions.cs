@@ -12,6 +12,7 @@ public static class InfrastructureServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(env);
 
         services.AddPersistence(configuration, env);
+        services.AddIdentity(configuration);
 
         return services;
     }
