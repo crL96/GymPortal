@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "404 - Not Found";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/css/NotFound.css" asp-append-version="true" />
+}
+
+<section class="section__404">
+    <div class="container">
+        <img src="~/images/404-error-img.png" alt="404" />
+        <h1>Oops! page not found</h1>
+        <p>The page you are looking for does not exists.</p>
+        <a class="btn" asp-controller="Home" asp-action="Index">Back to Homepage</a>
+    </div>
+</section>
