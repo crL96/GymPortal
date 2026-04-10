@@ -1,6 +1,7 @@
 using Application.Abstractions.Auth;
 using Application.Dtos.Auth;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Identity.Services;
 
@@ -33,11 +34,10 @@ public class IdentityAuthService(SignInManager<AppUser> signInManager, UserManag
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             return AuthResult.InvalidCredentials();
 
-        var user = await userManager.FindByEmailAsync(email);
-        if (user is not null)
+        if (await UserExists(email))
             return AuthResult.UserAlreadyExists();
 
-        user = AppUser.Create(email);
+        var user = AppUser.Create(email);
 
         var created = await userManager.CreateAsync(user, password);
         if (!created.Succeeded)
@@ -52,4 +52,13 @@ public class IdentityAuthService(SignInManager<AppUser> signInManager, UserManag
     }
 
     public Task SignOutUserAsync() => signInManager.SignOutAsync();
+
+    public async Task<bool> UserExists(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            throw new ArgumentNullException(nameof(email));
+
+        var exists = await userManager.Users.AnyAsync(x => x.Email == email);
+        return exists;
+    }
 }
