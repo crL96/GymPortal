@@ -19,6 +19,7 @@ var app = builder.Build();
 app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseStatusCodePagesWithReExecute("/error/{0}");
 
 app.UseSession();
 app.UseAuthentication();

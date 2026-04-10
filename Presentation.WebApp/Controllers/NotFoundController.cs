@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.WebApp.Controllers;
 
-[Route("404")]
+[Route("error/404")]
 public class NotFoundController : Controller
 {
     [HttpGet]
