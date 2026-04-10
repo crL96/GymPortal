@@ -19,7 +19,9 @@
     <nav class="account-menu">
         <ul class="menu">
             <li class="menu-item">
-                <a class="menu-item-link" asp-action="SignUp" asp-controller="Authentication">Become Member</a>
+                <a class="menu-item-link" asp-area="Authentication" asp-action="Index" asp-controller="SignUp">
+                    Become Member
+                </a>
             </li>
             <li class="menu-item">
                 <a class="btn btn-accent" asp-action="My" asp-controller="Account">My Account</a>
