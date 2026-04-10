@@ -44,3 +44,9 @@
     height: 40px;
   }
 }
+
+#signInForm {
+  .btn {
+    margin-top: 1.5rem;
+  }
+}
