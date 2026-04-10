@@ -1,4 +1,6 @@
+using Application.Abstractions.Auth;
 using Infrastructure.Identity;
+using Infrastructure.Identity.Services;
 using Infrastructure.Persistence.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +32,8 @@ public static class IdentityServiceCollectionExtensions
             x.ExpireTimeSpan = TimeSpan.FromDays(30);
             x.SlidingExpiration = true;
         });
+
+        services.AddScoped<IAuthService, IdentityAuthService>();
 
         return services;
     }
