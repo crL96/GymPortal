@@ -65,7 +65,6 @@ public class SignUpController(IAuthService authService) : Controller
 
         await authService.SignInUserAsync(email, form.Password, false);
 
-        //TODO redirect to sign in page (that handles already signed in redirects)
-        return Redirect("/");
+        return Redirect("/account");
     }
 }
