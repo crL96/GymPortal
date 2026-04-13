@@ -11,10 +11,19 @@
 
   .container.account {
     display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-areas: "aside main";
-    gap: 4rem;
+    grid-template-columns: 1fr;
+    grid-template-areas: "aside" "main";
+    gap: 2rem;
     padding: 0;
+
+    @media (width >= 768px) {
+      grid-template-columns: 1fr 3fr;
+      grid-template-areas: "aside main";
+    }
+
+    @media (width >= 992px) {
+      gap: 4rem;
+    }
 
     aside {
       grid-area: aside;
@@ -22,10 +31,6 @@
 
     main {
       grid-area: main;
-
-      h2 {
-        font-size: 1em;
-      }
     }
   }
 }
