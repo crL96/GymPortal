@@ -1,4 +1,5 @@
 using Application.Abstractions.Auth;
+using Application.Abstractions.User;
 using Infrastructure.Identity;
 using Infrastructure.Identity.Services;
 using Infrastructure.Persistence.Contexts;
@@ -34,6 +35,7 @@ public static class IdentityServiceCollectionExtensions
         });
 
         services.AddScoped<IAuthService, IdentityAuthService>();
+        services.AddScoped<IUserService, IdentityUserService>();
 
         return services;
     }

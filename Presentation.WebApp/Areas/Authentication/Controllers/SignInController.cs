@@ -45,7 +45,7 @@ public class SignInController(IAuthService authService) : Controller
             if (!string.IsNullOrWhiteSpace(returnUrl))
                 return Redirect(returnUrl);
 
-            return Redirect("/");
+            return Redirect("/account");
         }
         catch
         {

@@ -1,0 +1,66 @@
+.about-me-section,
+.my-stats-section {
+  background-color: var(--section-background-color);
+  padding: 1rem 2rem 2rem;
+  margin-bottom: 4rem;
+  border-radius: 20px;
+
+  @media (width >= 992px) {
+    padding: 1rem 4rem 2rem;
+  }
+}
+
+.about-me-section {
+  .submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+
+  .title {
+    h3 {
+      font-size: 3.5rem;
+    }
+  }
+
+  .field-validation {
+    margin: 0.1rem 0 0.8rem;
+  }
+}
+
+.my-stats-section {
+  .stat-item {
+    margin-bottom: 1rem;
+  }
+
+  .progress-bar-outer {
+    background-color: var(--progress-bar-background-color);
+    height: 10px;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .progress-bar-inner {
+    height: 100%;
+    border-radius: 5px;
+    background-color: var(--progress-bar-highlighted-color);
+  }
+
+  .stat-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h4,
+    p {
+      margin: 1rem 0;
+      font-size: 1.25rem;
+      font-family: var(--font-heading);
+    }
+  }
+}
+
+.stats-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}

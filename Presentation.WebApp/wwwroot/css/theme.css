@@ -69,4 +69,9 @@
   --section-title-dot-color: var(--theme-color);
 
   --brands-background-color: var(--theme-color);
+
+  --account-menu-title-background-color: var(--theme-color);
+
+  --progress-bar-background-color: var(--light-color);
+  --progress-bar-highlighted-color: var(--theme-color);
 }

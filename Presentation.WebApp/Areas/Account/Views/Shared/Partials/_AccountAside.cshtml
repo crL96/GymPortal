@@ -1,0 +1,32 @@
+﻿<section class="account-menu-section">
+    <nav class="account-options-menu options-menu">
+        <div class="options-menu-title">
+            Options Menu
+        </div>
+        <ul class="menu account">
+            <li class="menu-item">
+                <a class="menu-item-link" asp-area="Account" asp-controller="Home" asp-action="Index">About Me</a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-item-link" asp-area="Account" asp-controller="Membership" asp-action="Index">
+                    My Membership
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-item-link" asp-area="Account" asp-controller="AccountBookings" asp-action="Index">
+                    My Bookings
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-item-link" asp-area="Authentication" asp-controller="SignOut" asp-action="Index">
+                    Sign Out
+                </a>
+            </li>
+        </ul>
+    </nav>
+</section>
+<section class="remove-account-section">
+    <p>If you like to cancel your account click below</p>
+    <a asp-area="Account" asp-controller="Home" asp-action="RemoveAccount">Remove Account</a>
+    <div>@TempData["Message"]</div>
+</section>
