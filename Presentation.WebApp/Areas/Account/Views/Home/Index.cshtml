@@ -1,4 +1,5 @@
-﻿@{
+﻿@model AboutMeViewModel
+@{
     ViewData["Title"] = "My Account";
 }
 
@@ -8,7 +9,14 @@
 
 @section ProfileImage {
     <section class="profile-img-section">
-        <img src="~/images/profile-image-avatar.png" alt="user profile image" />
+        @if (!string.IsNullOrWhiteSpace(Model.ProfileImageUrl))
+        {
+            <img src="@Model.ProfileImageUrl" alt="user profile image" />
+        }
+        else
+        {
+            <img src="~/images/profile-image-avatar.png" alt="user profile image" />
+        }
     </section>
 }
 

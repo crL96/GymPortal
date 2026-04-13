@@ -1,5 +1,4 @@
-﻿@using Presentation.WebApp.Areas.Account.Models
-@model AboutMeViewModel
+﻿@model AboutMeViewModel
 @{
     ViewData["Title"] = "My Account";
 }
@@ -10,7 +9,7 @@
         <hr />
     </div>
     <form id="aboutMeForm" method="post" enctype="multipart/form-data" asp-area="Account" asp-controller="Home"
-          asp-action="AboutMe" novalidate>
+          asp-action="Index" novalidate>
         <div class="form-group">
             <label class="form-label" asp-for="AboutMeForm.FirstName"></label>
             <input class="form-input" asp-for="AboutMeForm.FirstName" />
@@ -43,5 +42,7 @@
 
         <div asp-validation-summary="ModelOnly"></div>
         @Html.AntiForgeryToken()
+
+        <span class="field-validation-error">@Model.ErrorMessage</span>
     </form>
 </section>
