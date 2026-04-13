@@ -27,5 +27,6 @@
 </section>
 <section class="remove-account-section">
     <p>If you like to cancel your account click below</p>
-    <a asp-area="Account" asp-controller="Account" asp-action="RemoveAccount">Remove Account</a>
+    <a asp-area="Account" asp-controller="Home" asp-action="RemoveAccount">Remove Account</a>
+    <div>@TempData["Message"]</div>
 </section>

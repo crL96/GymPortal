@@ -78,6 +78,22 @@ public class HomeController(IUserService userService) : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public async Task<IActionResult> RemoveAccount()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrWhiteSpace(userId))
+            return Redirect("/sign-out");
+
+        var deleted = await userService.DeleteUserAsync(userId);
+        if (!deleted.Succeeded)
+        {
+            TempData["Message"] = "Something went wrong, account was NOT deleted.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        return Redirect("/sign-out");
+    }
+
     private static async Task<string> SaveProfileImageAsync(IFormFile file)
     {
         var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "profile-images");
