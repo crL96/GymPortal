@@ -2,10 +2,14 @@
     ViewData["Title"] = "My Account";
 }
 
+@section Css {
+    <link rel="stylesheet" href="~/css/account/about-me.css" asp-append-version="true" />
+}
+
 @section ProfileImage {
     <section class="profile-img-section">
         <img src="~/images/profile-image-avatar.png" alt="user profile image" />
     </section>
 }
 
-<h1>About me</h1>
+<partial name="Partials/_AboutMeSection" />

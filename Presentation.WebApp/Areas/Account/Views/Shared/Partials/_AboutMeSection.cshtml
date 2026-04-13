@@ -1,0 +1,47 @@
+﻿@using Presentation.WebApp.Areas.Account.Models
+@model AboutMeViewModel
+@{
+    ViewData["Title"] = "My Account";
+}
+
+<section class="about-me-section">
+    <div class="title">
+        <h3>About Me</h3>
+        <hr />
+    </div>
+    <form id="aboutMeForm" method="post" enctype="multipart/form-data" asp-area="Account" asp-controller="Home"
+          asp-action="AboutMe" novalidate>
+        <div class="form-group">
+            <label class="form-label" asp-for="AboutMeForm.FirstName"></label>
+            <input class="form-input" asp-for="AboutMeForm.FirstName" />
+            <span class="field-validation" asp-validation-for="AboutMeForm.FirstName"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="AboutMeForm.LastName"></label>
+            <input class="form-input" asp-for="AboutMeForm.LastName" />
+            <span class="field-validation" asp-validation-for="AboutMeForm.LastName"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="AboutMeForm.Email"></label>
+            <input class="form-input" asp-for="AboutMeForm.Email" readonly />
+            <span class="field-validation" asp-validation-for="AboutMeForm.Email"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="AboutMeForm.PhoneNumber"></label>
+            <input class="form-input" asp-for="AboutMeForm.PhoneNumber" />
+            <span class="field-validation" asp-validation-for="AboutMeForm.PhoneNumber"></span>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="form-label" asp-for="AboutMeForm.ProfileImage"></label>
+            <input class="form-input" asp-for="AboutMeForm.ProfileImage" />
+            <span class="field-validation" asp-validation-for="AboutMeForm.ProfileImage"></span>
+        </div>
+        <div class="form-group submit">
+            <button class="btn" type="submit">Save</button>
+        </div>
+
+        <div asp-validation-summary="ModelOnly"></div>
+        @Html.AntiForgeryToken()
+    </form>
+</section>

@@ -1,0 +1,26 @@
+.about-me-section {
+  background-color: var(--section-background-color);
+  padding: 1rem 2rem 2rem;
+  margin-bottom: 2rem;
+  border-radius: 20px;
+
+  @media (width >= 992px) {
+    padding: 1rem 4rem 2rem;
+  }
+
+  .submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+  }
+
+  .title {
+    h3 {
+      font-size: 3.5rem;
+    }
+  }
+
+  .field-validation {
+    margin: 0.1rem 0 0.8rem;
+  }
+}
