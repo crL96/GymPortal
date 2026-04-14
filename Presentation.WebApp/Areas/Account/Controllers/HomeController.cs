@@ -56,6 +56,11 @@ public class HomeController(IUserService userService) : Controller
 
         if (viewModel.AboutMeForm.ProfileImage is not null && viewModel.AboutMeForm.ProfileImage.Length > 0)
         {
+            if (viewModel.AboutMeForm.ProfileImage.Length > 2 * 1024 * 1024)
+            {
+                ModelState.AddModelError("AboutMeForm.ProfileImage", "Maximum file size is 2 MB");
+                return View(viewModel);
+            }
             imageUrl = await SaveProfileImageAsync(viewModel.AboutMeForm.ProfileImage);
         }
 
