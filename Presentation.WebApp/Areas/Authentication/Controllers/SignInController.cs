@@ -16,6 +16,7 @@ public class SignInController(IAuthService authService) : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Index(SignInForm form, string? returnUrl = null)
     {
         ViewBag.ReturnUrl = returnUrl;

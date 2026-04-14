@@ -43,6 +43,7 @@ public class SignUpController(IAuthService authService) : Controller
     }
 
     [HttpPost("set-password")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> SetPassword(SetPasswordForm form)
     {
         if (!ModelState.IsValid)

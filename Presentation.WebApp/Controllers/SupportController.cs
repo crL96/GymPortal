@@ -11,6 +11,7 @@ public class SupportController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Index(ContactForm form)
     {
         if (!ModelState.IsValid)

@@ -36,6 +36,7 @@ public class HomeController(IUserService userService) : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Index(AboutMeViewModel viewModel)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
