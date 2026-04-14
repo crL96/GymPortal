@@ -13,4 +13,13 @@ public class AppUser : IdentityUser
         UserName = email.Trim().ToLowerInvariant(),
         Email = email.Trim().ToLowerInvariant()
     };
+
+    public static AppUser Create(string email, string? firstName, string? lastName, string? imageUrl) => new()
+    {
+        UserName = email.Trim().ToLowerInvariant(),
+        Email = email.Trim().ToLowerInvariant(),
+        FirstName = firstName?.Trim().ToLowerInvariant(),
+        LastName = lastName?.Trim().ToLowerInvariant(),
+        ImageUrl = imageUrl?.Trim()
+    };
 }

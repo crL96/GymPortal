@@ -7,5 +7,6 @@ public enum AuthErrorType
     IsLockedOut,
     NotAllowed,
     UserAlreadyExists,
+    ExternalError,
     Error
 }
