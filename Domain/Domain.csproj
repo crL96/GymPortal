@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregates\Membership\Exceptions\" />
+    <Folder Include="Aggregates\Membership\ValueObjects\" />
+    <Folder Include="Common\" />
+    <Folder Include="Common\Exceptions\" />
+  </ItemGroup>
+
 </Project>
