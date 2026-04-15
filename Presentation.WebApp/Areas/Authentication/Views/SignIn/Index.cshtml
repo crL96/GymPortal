@@ -16,6 +16,23 @@
 
     <hr />
 
+    <div class="external-auth-area">
+        <form method="post" asp-area="Authentication" asp-controller="SignIn" asp-action="ExternalLogin">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="provider" value="GitHub" />
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+            <button class="external-login" type="submit">
+                <img src="~/images/github-logo.svg" alt="Sign in with github" />
+            </button>
+        </form>
+    </div>
+
+    <div class="continue-with-hr">
+        <hr />
+        <p>OR CONTINUE WITH</p>
+        <hr />
+    </div>
+
 
     <form id="signInForm" method="post" asp-area="Authentication" asp-controller="SignIn" asp-action="Index" novalidate>
         @Html.AntiForgeryToken()
