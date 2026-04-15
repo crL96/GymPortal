@@ -38,6 +38,8 @@ public static class PersistenceServiceCollectionExtensions
                 options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
         }
 
+        services.AddScoped<IMembershipRepository, MembershipRepository>();
+
         return services;
     }
 }
