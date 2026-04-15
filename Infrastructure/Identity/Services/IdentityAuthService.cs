@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using Application.Abstractions.Auth;
+using Application.Abstractions.Services.Auth;
 using Application.Dtos.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-using Application.Abstractions.User;
+using Application.Abstractions.Services.User;
 using Application.Dtos.User;
 using Microsoft.AspNetCore.Identity;
 

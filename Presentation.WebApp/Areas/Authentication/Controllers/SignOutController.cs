@@ -1,4 +1,4 @@
-using Application.Abstractions.Auth;
+using Application.Abstractions.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.WebApp.Areas.Authentication.Controllers;
