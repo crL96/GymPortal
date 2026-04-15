@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Abstractions\" />
     <Folder Include="Abstractions\Auth\" />
+    <Folder Include="Abstractions\Repositories\" />
     <Folder Include="Abstractions\User\" />
     <Folder Include="Dtos\" />
     <Folder Include="Dtos\Auth\" />
