@@ -1,21 +1,27 @@
 using Application.Abstractions.Auth;
 using Application.Dtos.Auth;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApp.Areas.Authentication.Models;
 
 namespace Presentation.WebApp.Areas.Authentication.Controllers;
 
 [Area("Authentication")]
-[Route("sign-in")]
-public class SignInController(IAuthService authService) : Controller
+public class SignInController(IAuthService authService, SignInManager<AppUser> signInManager) : Controller
 {
+    [HttpGet("sign-in")]
     public IActionResult Index(string? returnUrl = null)
     {
+        var redirect = GetRedirectIfSignedIn();
+        if (redirect is not null)
+            return redirect;
+
         ViewBag.ReturnUrl = returnUrl;
         return View();
     }
 
-    [HttpPost]
+    [HttpPost("sign-in")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Index(SignInForm form, string? returnUrl = null)
     {
@@ -46,7 +52,7 @@ public class SignInController(IAuthService authService) : Controller
             if (!string.IsNullOrWhiteSpace(returnUrl))
                 return Redirect(returnUrl);
 
-            return Redirect("/account");
+            return GetRedirectIfSignedIn() ?? Redirect("/");
         }
         catch
         {
@@ -55,5 +61,50 @@ public class SignInController(IAuthService authService) : Controller
 
             return View(form);
         }
+    }
+
+    [HttpPost("external-login")]
+    [ValidateAntiForgeryToken]
+    public IActionResult ExternalLogin(string provider, string? returnUrl = null)
+    {
+        var callbackUrl = Url.Action(nameof(ExternalLoginCallback), "SignIn", new
+        {
+            area = "Authentication",
+            returnUrl
+        });
+
+        var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, callbackUrl);
+        return Challenge(properties, provider);
+    }
+
+    [HttpGet("external-login")]
+    public async Task<IActionResult> ExternalLoginCallback(string? returnUrl = null, string? remoteError = null)
+    {
+        if (!string.IsNullOrWhiteSpace(remoteError))
+        {
+            TempData["ExternalErrorMessage"] = $"External provider error: {remoteError}";
+            return RedirectToAction(nameof(Index), new { returnUrl });
+        }
+
+        var result = await authService.SignInExternalUserAsync("Member");
+        if (!result.Succeeded)
+        {
+            TempData["ExternalErrorMessage"] = result.ErrorMessage;
+            return RedirectToAction(nameof(Index), new { returnUrl });
+        }
+
+        if (!string.IsNullOrWhiteSpace(returnUrl))
+            return Redirect(returnUrl);
+
+        return GetRedirectIfSignedIn() ?? Redirect("/");
+    }
+
+
+    private RedirectResult? GetRedirectIfSignedIn()
+    {
+        if (User.Identity?.IsAuthenticated == true)
+            return Redirect("/account");
+
+        return null;
     }
 }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Application.Abstractions.Auth;
 using Application.Dtos.Auth;
 using Microsoft.AspNetCore.Identity;
@@ -60,5 +61,58 @@ public class IdentityAuthService(SignInManager<AppUser> signInManager, UserManag
 
         var exists = await userManager.Users.AnyAsync(x => x.Email == email);
         return exists;
+    }
+
+    public async Task<AuthResult> SignInExternalUserAsync(string? roleName = null)
+    {
+        var externalInfo = await signInManager.GetExternalLoginInfoAsync();
+        if (externalInfo is null)
+            return AuthResult.ExternalError();
+
+        var email = externalInfo.Principal.FindFirstValue(ClaimTypes.Email);
+        if (string.IsNullOrWhiteSpace(email))
+            return AuthResult.ExternalError($"No email address was provided by {externalInfo.LoginProvider}");
+
+        var signInResult = await signInManager.ExternalLoginSignInAsync(
+            externalInfo.LoginProvider,
+            externalInfo.ProviderKey,
+            isPersistent: false,
+            bypassTwoFactor: true
+        );
+
+        if (signInResult.Succeeded)
+            return AuthResult.Ok();
+
+        var user = await userManager.FindByEmailAsync(email);
+        if (user is not null)
+            return AuthResult.UserAlreadyExists("Local account with same email already exists");
+
+        var firstName = externalInfo.Principal.FindFirstValue(ClaimTypes.GivenName);
+        var lastName = externalInfo.Principal.FindFirstValue(ClaimTypes.Surname);
+        var imageUrl = externalInfo.LoginProvider switch
+        {
+            "GitHub" => externalInfo.Principal.FindFirstValue("urn:github:avatar"),
+            _ => null
+        };
+        user = AppUser.Create(email, firstName, lastName, imageUrl);
+        user.EmailConfirmed = true;
+
+        var createdResult = await userManager.CreateAsync(user);
+        if (!createdResult.Succeeded)
+            return AuthResult.Failed(createdResult.Errors.FirstOrDefault()?.Description ?? "Failed to create user");
+
+        if (!string.IsNullOrWhiteSpace(roleName))
+        {
+            var roleResult = await userManager.AddToRoleAsync(user, roleName);
+            if (!roleResult.Succeeded)
+                return AuthResult.Failed(createdResult.Errors.FirstOrDefault()?.Description ?? "Failed to add role to user");
+        }
+
+        var addLoginResult = await userManager.AddLoginAsync(user, externalInfo);
+        if (!addLoginResult.Succeeded)
+            return AuthResult.Failed(createdResult.Errors.FirstOrDefault()?.Description ?? "Failed to connect external login to user");
+
+        await signInManager.SignInAsync(user, isPersistent: false);
+        return AuthResult.Ok();
     }
 }

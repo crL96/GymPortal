@@ -60,6 +60,7 @@
   --form-title-paragraph-color: var(--gray-color);
   --form-checkbox-checked-background-color: var(--theme-color);
   --form-checkbox-border-color: var(--dark-color);
+  --external-login-border-color: var(--gray-color);
 
   --tooltip-background-color: var(--dark-color);
   --tooltip-text-color: var(--white-color);

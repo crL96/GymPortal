@@ -13,5 +13,6 @@ public sealed record AuthResult
     public static AuthResult RequiresTwoFactorAuth() => new(false, AuthErrorType.RequiresTwoFactorAuth);
     public static AuthResult IsLockedOut() => new(false, AuthErrorType.IsLockedOut);
     public static AuthResult NotAllowed() => new(false, AuthErrorType.NotAllowed);
-    public static AuthResult UserAlreadyExists() => new(false, AuthErrorType.UserAlreadyExists);
+    public static AuthResult UserAlreadyExists(string? errorMessage = null) => new(false, AuthErrorType.UserAlreadyExists, errorMessage);
+    public static AuthResult ExternalError(string? errorMessage = null) => new(false, AuthErrorType.ExternalError, errorMessage);
 };

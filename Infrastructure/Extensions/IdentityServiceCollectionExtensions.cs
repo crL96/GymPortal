@@ -34,6 +34,8 @@ public static class IdentityServiceCollectionExtensions
             x.SlidingExpiration = true;
         });
 
+        services.AddExternalIdentity(configuration);
+
         services.AddScoped<IAuthService, IdentityAuthService>();
         services.AddScoped<IUserService, IdentityUserService>();
 

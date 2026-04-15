@@ -43,6 +43,45 @@
     align-items: center;
     height: 40px;
   }
+
+  .external-auth-area {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .external-login {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    background-color: transparent;
+    border: 1px solid var(--external-login-border-color);
+    padding: 1rem;
+
+    &:hover {
+      cursor: pointer;
+      padding: 0.9rem;
+    }
+  }
+
+  .continue-with-hr {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin: 3rem 0;
+
+    * {
+      margin: 0;
+    }
+  }
+
+  .external-error-message {
+    color: var(--danger-color);
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
 }
 
 #signInForm {
