@@ -75,6 +75,13 @@
       margin: 0;
     }
   }
+
+  .external-error-message {
+    color: var(--danger-color);
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
 }
 
 #signInForm {

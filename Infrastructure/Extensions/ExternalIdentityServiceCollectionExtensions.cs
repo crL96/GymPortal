@@ -2,6 +2,7 @@ using System.Security.Claims;
 using AspNet.Security.OAuth.GitHub;
 using Infrastructure.Identity.Options;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,17 @@ public static class ExternalIdentityServiceCollectionExtensions
                 options.ClientId = gitHubOptions.ClientId;
                 options.SignInScheme = IdentityConstants.ExternalScheme;
                 options.CallbackPath = "/signin-github";
+
+                options.Events = new OAuthEvents
+                {
+                    OnRemoteFailure = context =>
+                    {
+                        context.HandleResponse();
+
+                        context.Response.Redirect("/external-login?remoteError=access_denied");
+                        return Task.CompletedTask;
+                    }
+                };
 
                 options.Scope.Add("user:email");
 
