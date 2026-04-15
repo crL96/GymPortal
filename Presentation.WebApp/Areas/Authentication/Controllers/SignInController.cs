@@ -13,6 +13,10 @@ public class SignInController(IAuthService authService, SignInManager<AppUser> s
     [HttpGet("sign-in")]
     public IActionResult Index(string? returnUrl = null)
     {
+        var redirect = GetRedirectIfSignedIn();
+        if (redirect is not null)
+            return redirect;
+
         ViewBag.ReturnUrl = returnUrl;
         return View();
     }
@@ -48,7 +52,7 @@ public class SignInController(IAuthService authService, SignInManager<AppUser> s
             if (!string.IsNullOrWhiteSpace(returnUrl))
                 return Redirect(returnUrl);
 
-            return Redirect("/account");
+            return GetRedirectIfSignedIn() ?? Redirect("/");
         }
         catch
         {
@@ -92,6 +96,15 @@ public class SignInController(IAuthService authService, SignInManager<AppUser> s
         if (!string.IsNullOrWhiteSpace(returnUrl))
             return Redirect(returnUrl);
 
-        return Redirect("/");
+        return GetRedirectIfSignedIn() ?? Redirect("/");
+    }
+
+
+    private RedirectResult? GetRedirectIfSignedIn()
+    {
+        if (User.Identity?.IsAuthenticated == true)
+            return Redirect("/account");
+
+        return null;
     }
 }
