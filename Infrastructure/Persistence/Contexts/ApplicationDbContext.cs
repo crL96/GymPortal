@@ -1,4 +1,6 @@
 using Infrastructure.Identity;
+using Infrastructure.Persistence.Configurations;
+using Infrastructure.Persistence.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +13,14 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, str
     {
     }
 
+    public DbSet<MembershipEntity> Memberships => Set<MembershipEntity>();
+    public DbSet<UserMembershipEntity> UserMembership => Set<UserMembershipEntity>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        //Register model configurations
+        builder.ApplyConfiguration(new MembershipEntityConfiguration());
+        builder.ApplyConfiguration(new UserMembershipEntityConfiguration());
     }
 }

@@ -1,5 +1,5 @@
-using Application.Abstractions.Auth;
-using Application.Abstractions.User;
+using Application.Abstractions.Services.Auth;
+using Application.Abstractions.Services.User;
 using Infrastructure.Identity;
 using Infrastructure.Identity.Services;
 using Infrastructure.Persistence.Contexts;

@@ -1,0 +1,37 @@
+﻿@model Membership
+
+<section class="current-membership-section">
+    <h2>Current Membership</h2>
+
+    @if (Model is not null)
+    {
+        <div class="membership">
+            <div class="membership-info">
+                <h4 class="membership-name">@Model.Name</h4>
+                <p>Monthly cost: @Model.Price kr</p>
+                <p>Status: @(Model.IsActive ? "Active" : "Cancelled")</p>
+            </div>
+            @if (Model.IsActive)
+            {
+                <a class="btn cancel" asp-area="Account" asp-controller="Membership" asp-action="CancelMembership">
+                    Cancel membership
+                </a>
+            }
+            else
+            {
+                <a class="btn" asp-area="Account" asp-controller="Membership" asp-action="ReactivateMembership">
+                    Reactivate membership
+                </a>
+            }
+        </div>
+        @if (TempData["CurrentMembershipError"] is not null)
+        {
+            <p class="error-message">@TempData["CurrentMembershipError"]</p>
+        }
+    }
+    else
+    {
+        <p>Looks like you dont have a membership yet.</p>
+        <p>Sign up below!</p>
+    }
+</section>

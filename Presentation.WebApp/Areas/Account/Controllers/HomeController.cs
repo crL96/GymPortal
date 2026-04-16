@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using Application.Abstractions.User;
+using Application.Abstractions.Services.User;
 using Application.Dtos.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

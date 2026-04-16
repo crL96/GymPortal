@@ -36,7 +36,7 @@
 }
 
 .account-menu-section {
-  margin: 2rem 0 1rem;
+  margin: 0 0 1rem;
   background-color: var(--section-background-color);
   border-radius: 20px;
 
@@ -104,4 +104,6 @@
     width: 100%;
     border-radius: 20px;
   }
+
+  margin-bottom: 2rem;
 }

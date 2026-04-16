@@ -1,4 +1,6 @@
+using Application.Abstractions.Repositories.Memberships;
 using Infrastructure.Persistence.Contexts;
+using Infrastructure.Persistence.Repositories.Memberships;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +39,9 @@ public static class PersistenceServiceCollectionExtensions
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
         }
+
+        services.AddScoped<IMembershipRepository, MembershipRepository>();
+        services.AddScoped<IUserMembershipRepository, UserMembershipRepository>();
 
         return services;
     }

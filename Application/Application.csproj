@@ -17,13 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\" />
-    <Folder Include="Abstractions\Auth\" />
-    <Folder Include="Abstractions\User\" />
+    <Folder Include="Abstractions\Repositories\Memberships\" />
+    <Folder Include="Abstractions\Services\Memberships\" />
     <Folder Include="Dtos\" />
     <Folder Include="Dtos\Auth\" />
+    <Folder Include="Dtos\Memberships\" />
     <Folder Include="Dtos\User\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-using Application.Abstractions.Auth;
+using Application.Abstractions.Services.Auth;
 using Application.Dtos.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApp.Areas.Authentication.Models;

@@ -1,6 +1,6 @@
 using Application.Dtos.User;
 
-namespace Application.Abstractions.User;
+namespace Application.Abstractions.Services.User;
 
 public interface IUserService
 {

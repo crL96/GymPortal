@@ -28,11 +28,13 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Data\Seed\" />
     <Folder Include="Extensions\" />
     <Folder Include="Identity\Services\" />
     <Folder Include="Persistence\Configurations\" />
+    <Folder Include="Persistence\Entities\" />
     <Folder Include="Persistence\Migrations\" />
-    <Folder Include="Persistence\Repositories\" />
+    <Folder Include="Persistence\Repositories\Memberships\" />
   </ItemGroup>
 
 </Project>
