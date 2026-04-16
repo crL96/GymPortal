@@ -3,6 +3,11 @@
 <section class="available-memberships-section">
     <h2>Available Memberships</h2>
     <div class="memberships-container">
+        @if (Model.ErrorMessage is not null)
+        {
+            <p class="error-message">@Model.ErrorMessage</p>
+        }
+
         @foreach (Membership membership in Model.Memberships)
         {
             <div class="membership">
