@@ -6,8 +6,3 @@ public class InvalidTimeDomainException(string message) : DomainException(messag
 {
 
 }
-
-public class NoAvailableSpotsDomainException() : DomainException("Session must have atleast 1 available spot")
-{
-
-}
