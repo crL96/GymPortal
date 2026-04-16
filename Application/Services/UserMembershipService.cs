@@ -2,7 +2,7 @@ using Application.Abstractions.Repositories.Memberships;
 using Application.Abstractions.Services.Memberships;
 using Application.Dtos.Memberships;
 using Domain.Aggregates.Membership.ValueObjects;
-using Domain.Aggregates.UserMembership;
+using Domain.Aggregates.UserMemberships;
 using Domain.Common.Exceptions;
 
 namespace Application.Services;

@@ -1,4 +1,4 @@
-using Domain.Aggregates.UserMembership;
+using Domain.Aggregates.UserMemberships;
 
 namespace Application.Abstractions.Repositories.Memberships;
 

@@ -1,8 +1,7 @@
-using System;
 using Domain.Aggregates.Membership.ValueObjects;
 using Domain.Common.Exceptions;
 
-namespace Domain.Aggregates.UserMembership;
+namespace Domain.Aggregates.UserMemberships;
 
 public class UserMembership
 {
