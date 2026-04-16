@@ -38,6 +38,7 @@ public class MembershipController(IMembershipService membershipService, IUserMem
         {
             viewModel.AvailableMembershipsViewModel.Memberships.Add(new()
             {
+                Id = membership.Id,
                 Name = membership.Name,
                 Price = membership.Price,
                 IsCurrent = membership.Id == userMembershipId
@@ -47,4 +48,24 @@ public class MembershipController(IMembershipService membershipService, IUserMem
         return View(viewModel);
     }
 
+    public async Task<IActionResult> SelectPlan(Guid membershipId)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
+            return Redirect("sign-out");
+
+        var resultCurrent = await userMembershipService.GetByUserIdAsync(userId);
+        if (resultCurrent.UserMembership is not null)
+        {
+            var result = await userMembershipService.ChangeMembership(userId, membershipId);
+            Console.WriteLine(result.ErrorMessage);
+        }
+        else
+        {
+            var result = await userMembershipService.SignUpMembership(userId, membershipId);
+            Console.WriteLine(result.ErrorMessage);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 }

@@ -17,7 +17,10 @@
                 </div>
                 @if (!membership.IsCurrent)
                 {
-                    <button class="btn">Select plan</button>
+                    <form method="post" asp-controller="Membership" asp-action="SelectPlan">
+                        <input type="hidden" id="membershipId" name="membershipId" value="@membership.Id" />
+                        <button type="submit" class="btn">Select plan</button>
+                    </form>
                 }
                 else
                 {
