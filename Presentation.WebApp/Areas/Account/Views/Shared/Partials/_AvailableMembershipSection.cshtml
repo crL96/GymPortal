@@ -1,0 +1,25 @@
+﻿@model AvailableMembershipsViewModel
+
+<section class="available-memberships-section">
+    <h2>Available Memberships</h2>
+    <div class="memberships-container">
+        @foreach (Membership membership in Model.Memberships)
+        {
+            <div class="membership">
+                <div class="membership-info">
+                    <h4 class="membership-name">@membership.Name</h4>
+                    <p>Monthly cost: @membership.Price</p>
+                </div>
+                @if (!membership.IsCurrent)
+                {
+                    <button class="btn">Select plan</button>
+                }
+                else
+                {
+                    <p class="current-plan">Current plan</p>
+                }
+            </div>
+        }
+    </div>
+    <a asp-area="" asp-controller="Memberships" asp-action="Index">More info about our memberships</a>
+</section>

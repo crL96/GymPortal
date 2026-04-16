@@ -1,0 +1,51 @@
+.available-memberships-section {
+  background-color: var(--section-background-color);
+  padding: 1rem 2rem 2rem;
+  margin-bottom: 4rem;
+  border-radius: 20px;
+
+  @media (width >= 992px) {
+    padding: 2rem 4rem 3rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .memberships-container {
+    display: grid;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .membership {
+    background-color: var(--membership-background-color);
+    border-radius: 20px;
+    border: 1px solid var(--membership-border-color);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    h4,
+    p {
+      margin: 0;
+    }
+    h4 {
+      margin-bottom: 1rem;
+    }
+
+    .current-plan {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  }
+
+  a {
+    display: block;
+    text-align: center;
+  }
+}

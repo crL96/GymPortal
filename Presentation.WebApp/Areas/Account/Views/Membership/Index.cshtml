@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "My Membership";
+
+    //Placeholder mock
+    var viewModel = new AvailableMembershipsViewModel();
+    viewModel.Memberships.Add(new()
+    {
+        Name = "Standard",
+        Price = 495,
+        IsCurrent = true
+    });
+    viewModel.Memberships.Add(new()
+    {
+        Name = "Premium",
+        Price = 495,
+        IsCurrent = false
+    });
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/css/account/membership.css" asp-append-version="true" />
+}
+
+<partial name="Partials/_AvailableMembershipSection" model="viewModel" />

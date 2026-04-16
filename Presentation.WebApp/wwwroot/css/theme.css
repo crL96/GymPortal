@@ -75,4 +75,7 @@
 
   --progress-bar-background-color: var(--light-color);
   --progress-bar-highlighted-color: var(--theme-color);
+
+  --membership-background-color: var(--light-color);
+  --membership-border-color: var(--dark-color);
 }
