@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Data\Seed\" />
     <Folder Include="Extensions\" />
     <Folder Include="Identity\Services\" />
     <Folder Include="Persistence\Configurations\" />

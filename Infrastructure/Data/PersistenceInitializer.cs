@@ -1,3 +1,4 @@
+using Infrastructure.Data.Seed;
 using Infrastructure.Persistence.Contexts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,10 @@ internal static class PersistenceInitializer
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
         if (env.IsDevelopment())
+        {
             await context.Database.EnsureCreatedAsync();
+            await MembershipSeeder.SeedDefaultMemberships(sp);
+        }
     }
 
 }
