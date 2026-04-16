@@ -1,4 +1,5 @@
 using Application.Abstractions.Repositories.Bookings;
+using Application.Dtos.Bookings;
 using Domain.Aggregates.Booking;
 using Domain.Aggregates.Booking.ValueObjects;
 using Infrastructure.Persistence.Contexts;
@@ -11,15 +12,36 @@ public class BookingRepository(ApplicationDbContext context) :
     RepositoryBase<Booking, BookingId, BookingEntity, ApplicationDbContext>(context),
     IBookingRepository
 {
-    public async Task<IReadOnlyList<Booking>> GetByUserId(string userId, DateTime startTime, DateTime endTime, CancellationToken ct = default)
+    public async Task<IReadOnlyList<Booking>> GetBySessionId(Guid sessionId, CancellationToken ct = default)
+    {
+        var entities = await Set
+            .Where(x => x.TrainingSessionId.Value == sessionId)
+            .AsNoTracking()
+            .ToListAsync(ct);
+
+        return entities.Select(ToModel).ToList();
+    }
+
+    public async Task<IReadOnlyList<BookingDto>> GetByUserId(string userId, DateTime startTime, DateTime endTime, CancellationToken ct = default)
     {
         var bookingEntities = await Set
             .Where(x => x.UserId == userId)
             .Where(x => x.TrainingSession.StartTime < endTime && x.TrainingSession.EndTime > startTime)
+            .Include(x => x.TrainingSession)
             .AsNoTracking()
             .ToListAsync(ct);
 
-        return bookingEntities.Select(ToModel).ToList();
+        var bookings = bookingEntities
+            .Select(b => BookingDto.Create(
+                b.Id.Value,
+                b.UserId,
+                b.TrainingSessionId.Value,
+                b.TrainingSession.Name,
+                b.TrainingSession.StartTime,
+                b.TrainingSession.EndTime
+            )).ToList();
+
+        return bookings;
     }
 
     protected override BookingEntity ToEntity(Booking model)
