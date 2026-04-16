@@ -42,6 +42,7 @@ public static class PersistenceServiceCollectionExtensions
 
         services.AddScoped<IMembershipRepository, MembershipRepository>();
         services.AddScoped<IUserMembershipRepository, UserMembershipRepository>();
+        services.AddScoped<ITrainingSessionRepository, TrainingSessionRepository>();
 
         return services;
     }

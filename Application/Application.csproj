@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\Repositories\Memberships\" />
+    <Folder Include="Abstractions\Repositories\TrainingSessions\" />
     <Folder Include="Abstractions\Services\Memberships\" />
     <Folder Include="Dtos\" />
     <Folder Include="Dtos\Auth\" />
