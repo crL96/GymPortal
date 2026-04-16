@@ -21,7 +21,7 @@
     <Folder Include="Abstractions\Repositories\Memberships\" />
     <Folder Include="Abstractions\Repositories\TrainingSessions\" />
     <Folder Include="Abstractions\Services\Memberships\" />
-    <Folder Include="Dtos\" />
+    <Folder Include="Abstractions\Services\TrainingSessions\" />
     <Folder Include="Dtos\Auth\" />
     <Folder Include="Dtos\Memberships\" />
     <Folder Include="Dtos\User\" />
