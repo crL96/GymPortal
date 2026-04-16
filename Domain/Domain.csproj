@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Aggregates\Membership\Exceptions\" />
     <Folder Include="Aggregates\Membership\ValueObjects\" />
+    <Folder Include="Aggregates\TrainingSessions\" />
     <Folder Include="Aggregates\UserMembership\" />
     <Folder Include="Common\" />
     <Folder Include="Common\Exceptions\" />
