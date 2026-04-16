@@ -1,5 +1,4 @@
 using Application.Abstractions.Repositories.Memberships;
-using Domain.Aggregates.Membership.ValueObjects;
 using Domain.Aggregates.UserMembership;
 using Infrastructure.Persistence.Contexts;
 using Infrastructure.Persistence.Entities;
@@ -15,14 +14,13 @@ public class UserMembershipRepository(ApplicationDbContext context) :
         return new UserMembershipEntity()
         {
             UserId = model.UserId,
-            MembershipId = model.MembershipId.Value,
+            MembershipId = model.MembershipId,
             IsActive = model.IsActive
         };
     }
 
     protected override UserMembership ToModel(UserMembershipEntity entity)
     {
-        var membershipId = MembershipId.Recreate(entity.MembershipId);
-        return UserMembership.Recreate(entity.UserId, membershipId, entity.IsActive);
+        return UserMembership.Recreate(entity.UserId, entity.MembershipId, entity.IsActive);
     }
 }

@@ -1,3 +1,4 @@
+using Domain.Aggregates.Membership.ValueObjects;
 using Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -13,7 +14,11 @@ internal sealed class UserMembershipEntityConfiguration : IEntityTypeConfigurati
         builder.HasKey(x => x.UserId);
 
         builder.Property(x => x.MembershipId)
-            .IsRequired();
+            .IsRequired()
+            .HasConversion(
+                id => id.Value,
+                value => MembershipId.Recreate(value)
+            );
 
         builder.Property(x => x.IsActive)
             .IsRequired();

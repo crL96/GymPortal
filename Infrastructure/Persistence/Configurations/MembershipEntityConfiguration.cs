@@ -1,3 +1,4 @@
+using Domain.Aggregates.Membership.ValueObjects;
 using Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,6 +12,12 @@ internal sealed class MembershipEntityConfiguration : IEntityTypeConfiguration<M
         builder.ToTable("Memberships");
 
         builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.Id)
+            .HasConversion(
+                id => id.Value,
+                value => MembershipId.Recreate(value)
+            );
 
         builder.Property(x => x.Name)
             .HasMaxLength(50)

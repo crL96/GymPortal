@@ -1,8 +1,10 @@
+using Domain.Aggregates.Membership.ValueObjects;
+
 namespace Infrastructure.Persistence.Entities;
 
 public class MembershipEntity
 {
-    public Guid Id { get; set; }
+    public MembershipId Id { get; set; } = null!;
     public string Name { get; set; } = null!;
     public int Price { get; set; }
 

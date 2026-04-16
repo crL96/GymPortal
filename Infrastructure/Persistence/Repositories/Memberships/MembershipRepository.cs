@@ -24,7 +24,7 @@ public class MembershipRepository(ApplicationDbContext context) :
     {
         return new MembershipEntity()
         {
-            Id = model.Id.Value,
+            Id = model.Id,
             Name = model.Name,
             Price = model.Price
         };
@@ -32,7 +32,6 @@ public class MembershipRepository(ApplicationDbContext context) :
 
     protected override Membership ToModel(MembershipEntity entity)
     {
-        var id = MembershipId.Recreate(entity.Id);
-        return Membership.Recreate(id, entity.Name, entity.Price);
+        return Membership.Recreate(entity.Id, entity.Name, entity.Price);
     }
 }
