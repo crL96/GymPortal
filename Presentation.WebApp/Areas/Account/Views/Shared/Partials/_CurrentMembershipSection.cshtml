@@ -3,7 +3,6 @@
 <section class="current-membership-section">
     <h2>Current Membership</h2>
 
-
     @if (Model is not null)
     {
         <div class="membership">
@@ -24,8 +23,15 @@
                     Reactivate membership
                 </a>
             }
-
         </div>
-
+        @if (TempData["CurrentMembershipError"] is not null)
+        {
+            <p class="error-message">@TempData["CurrentMembershipError"]</p>
+        }
+    }
+    else
+    {
+        <p>Looks like you dont have a membership yet.</p>
+        <p>Sign up below!</p>
     }
 </section>

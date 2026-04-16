@@ -63,13 +63,37 @@ public class MembershipController(IMembershipService membershipService, IUserMem
         if (resultCurrent.UserMembership is not null)
         {
             var result = await userMembershipService.ChangeMembership(userId, membershipId);
-            Console.WriteLine(result.ErrorMessage);
         }
         else
         {
             var result = await userMembershipService.SignUpMembership(userId, membershipId);
-            Console.WriteLine(result.ErrorMessage);
         }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> CancelMembership()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
+            return Redirect("sign-out");
+
+        var result = await userMembershipService.CancelMembership(userId);
+        if (!result.Succeeded)
+            TempData["CurrentMembershipError"] = "Failed to cancel, try again later or contact support.";
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> ReactivateMembership()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
+            return Redirect("sign-out");
+
+        var result = await userMembershipService.ReactivateMembership(userId);
+        if (!result.Succeeded)
+            TempData["CurrentMembershipError"] = "Failed to reactivate, try again later or contact support.";
 
         return RedirectToAction(nameof(Index));
     }
