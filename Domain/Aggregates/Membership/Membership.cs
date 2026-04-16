@@ -23,7 +23,7 @@ public class Membership
         ValidatePrice(price);
 
         var id = MembershipId.Create();
-        return new Membership(id, name.Trim().ToLowerInvariant(), price);
+        return new Membership(id, name.Trim(), price);
     }
 
     public static Membership Recreate(MembershipId id, string name, int price)
