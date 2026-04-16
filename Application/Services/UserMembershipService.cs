@@ -77,6 +77,27 @@ public class UserMembershipService(IUserMembershipRepository userMembershipRepo,
         }
     }
 
+    public async Task<UserMembershipResult> ReactivateMembership(string userId, CancellationToken ct = default)
+    {
+        try
+        {
+            var userMembership = await userMembershipRepo.GetByIdAsync(userId, ct);
+            if (userMembership is null)
+                return UserMembershipResult.NotFound();
+
+            userMembership.ReactivatePlan();
+
+            var success = await userMembershipRepo.UpdateAsync(userId, userMembership, ct);
+            return success ?
+                UserMembershipResult.Ok() :
+                UserMembershipResult.Failed("Could not save to database");
+        }
+        catch (Exception ex)
+        {
+            return UserMembershipResult.Failed(ex.Message ?? "Could not update user membership");
+        }
+    }
+
     public async Task<UserMembershipResult> SignUpMembership(string userId, Guid membershipId, CancellationToken ct = default)
     {
         try
