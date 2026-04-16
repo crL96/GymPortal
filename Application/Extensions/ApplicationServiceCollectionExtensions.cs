@@ -1,4 +1,6 @@
+using Application.Abstractions.Services.Bookings;
 using Application.Abstractions.Services.Memberships;
+using Application.Abstractions.Services.TrainingSessions;
 using Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,8 @@ public static class ApplicationServiceCollectionExtensions
 
         services.AddScoped<IMembershipService, MembershipService>();
         services.AddScoped<IUserMembershipService, UserMembershipService>();
+        services.AddScoped<ITrainingSessionService, TrainingSessionService>();
+        services.AddScoped<IBookingService, BookingService>();
 
         return services;
     }
