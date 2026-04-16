@@ -6,4 +6,5 @@ public class Membership
     public string Name { get; set; } = null!;
     public int Price { get; set; }
     public bool IsCurrent { get; set; }
+    public bool IsActive { get; set; }
 }

@@ -32,17 +32,22 @@ public class MembershipController(IMembershipService membershipService, IUserMem
         }
 
         var userCurrentMembershipResult = await userMembershipService.GetByUserIdAsync(userId);
-        var userMembershipId = userCurrentMembershipResult.UserMembership?.MembershipId;
+        var userMembership = userCurrentMembershipResult.UserMembership;
 
         foreach (var membership in membershipsResult.Memberships!)
         {
-            viewModel.AvailableMembershipsViewModel.Memberships.Add(new()
+            var membershipModel = new Membership()
             {
                 Id = membership.Id,
                 Name = membership.Name,
                 Price = membership.Price,
-                IsCurrent = membership.Id == userMembershipId
-            });
+                IsCurrent = membership.Id == userMembership?.MembershipId,
+                IsActive = userMembership?.IsActive ?? false
+            };
+
+            viewModel.AvailableMembershipsViewModel.Memberships.Add(membershipModel);
+            if (membershipModel.IsCurrent)
+                viewModel.CurrentMembership = membershipModel;
         }
 
         return View(viewModel);
