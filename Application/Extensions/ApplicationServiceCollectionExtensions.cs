@@ -1,3 +1,5 @@
+using Application.Abstractions.Services.Memberships;
+using Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +12,9 @@ public static class ApplicationServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(configuration);
         ArgumentNullException.ThrowIfNull(env);
+
+        services.AddScoped<IMembershipService, MembershipService>();
+        services.AddScoped<IUserMembershipService, UserMembershipService>();
 
         return services;
     }
