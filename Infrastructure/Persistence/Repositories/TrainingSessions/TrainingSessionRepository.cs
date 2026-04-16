@@ -1,4 +1,5 @@
 using Application.Abstractions.Repositories.TrainingSessions;
+using Application.Dtos.TrainingSessions;
 using Domain.Aggregates.TrainingSessions;
 using Domain.Aggregates.TrainingSessions.ValueObjects;
 using Infrastructure.Persistence.Contexts;
@@ -34,13 +35,27 @@ public class TrainingSessionRepository(ApplicationDbContext context) :
         );
     }
 
-    public async Task<IReadOnlyList<TrainingSession>> GetByTimePeriod(DateTime startTime, DateTime endTime, CancellationToken ct)
+    public async Task<IReadOnlyList<TrainingSessionDto>> GetByTimePeriodWithBookings(DateTime startTime, DateTime endTime, CancellationToken ct)
     {
         var sessionEntities = await Set
             .Where(x => x.StartTime < endTime && x.EndTime > startTime)
+            .Include(x => x.Bookings)
             .AsNoTracking()
             .ToListAsync(ct);
 
-        return sessionEntities.Select(ToModel).ToList();
+        var sessions = new List<TrainingSessionDto>();
+        foreach (var entity in sessionEntities)
+        {
+            sessions.Add(new(
+                entity.Id.Value,
+                entity.Name,
+                entity.StartTime,
+                entity.EndTime,
+                entity.AvailableSpots,
+                entity.Bookings.Select(x => x.UserId).ToList()
+            ));
+        }
+
+        return sessions;
     }
 }
