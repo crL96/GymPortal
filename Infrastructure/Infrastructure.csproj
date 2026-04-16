@@ -34,6 +34,7 @@
     <Folder Include="Persistence\Configurations\" />
     <Folder Include="Persistence\Entities\" />
     <Folder Include="Persistence\Migrations\" />
+    <Folder Include="Persistence\Repositories\Bookings\" />
     <Folder Include="Persistence\Repositories\Memberships\" />
     <Folder Include="Persistence\Repositories\TrainingSessions\" />
   </ItemGroup>

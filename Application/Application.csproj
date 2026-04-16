@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Abstractions\Repositories\Bookings\" />
     <Folder Include="Abstractions\Repositories\Memberships\" />
     <Folder Include="Abstractions\Repositories\TrainingSessions\" />
     <Folder Include="Abstractions\Services\Memberships\" />
