@@ -10,6 +10,7 @@
   <ItemGroup>
     <Folder Include="Areas\Account\Controllers\" />
     <Folder Include="Areas\Account\Models\" />
+    <Folder Include="Areas\Account\Views\Booking\" />
     <Folder Include="Areas\Account\Views\Membership\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\SignIn\" />

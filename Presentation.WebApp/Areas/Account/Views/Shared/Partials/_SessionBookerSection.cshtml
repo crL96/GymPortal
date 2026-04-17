@@ -1,0 +1,44 @@
+﻿@model List<TrainingSession>
+<section class="session-booker-section">
+    <h2>Book a Session</h2>
+
+    <form id="date-form" method="get" asp-area="Account" asp-controller="Booking" asp-action="Index">
+        <label class="form-label" for="bookingSearchDate">Select date: </label>
+        <input class="form-input" type="date" name="bookingSearchDate" id="bookingSearchDate"
+               min="@DateTime.Now.Date.ToShortDateString()" />
+        <button class="btn search" type="submit">Find sessions</button>
+    </form>
+
+    <div class="sessions-container">
+        @if (Model is not null)
+        {
+            @foreach (var session in Model)
+            {
+                <div class="session">
+                    <div class="session-info">
+                        <h4 class="session-name">@session.Name</h4>
+                        <p class="session-time">
+                            @session.StartTime.ToShortDateString() : @session.StartTime.ToShortTimeString() -
+                            @session.EndTime.ToShortTimeString()
+                        </p>
+                        <p class="session-spots">
+                            <strong>Participants:</strong> @session.BookedIds.Count / @session.AvailableSpots
+                        </p>
+                    </div>
+                    <form method="post" asp-controller="Booking" asp-action="CreateBooking">
+                        <input type="hidden" id="sessionId" name="sessionId" value="@session.Id" />
+                        <button type="submit" class="btn">Book session</button>
+                    </form>
+                </div>
+            }
+            @if (TempData["SessionBookerError"] is not null)
+            {
+                <p class="error-message">@TempData["SessionBookerError"]</p>
+            }
+            @if (Model.Count < 1 && TempData["SessionBookerError"] is null)
+            {
+                <p>Looks like we haven't published any sessions for this date yet.</p>
+            }
+        }
+    </div>
+</section>
