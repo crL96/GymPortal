@@ -1,4 +1,5 @@
 ﻿@using Presentation.WebApp.Models.Support
+@using SQLitePCL
 @model ContactForm
 
 <section class="section__contact-form">
@@ -77,6 +78,10 @@
                 <div data-type="submit-button">
                     <button class="btn" type="submit">Submit Message</button>
                 </div>
+                @if (TempData["FormSubmitMessage"] is not null)
+                {
+                    <p>@TempData["FormSubmitMessage"]</p>
+                }
             </form>
         </div>
     </div>
