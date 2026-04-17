@@ -15,6 +15,7 @@ public static class InfrastructureInitializer
         await IdentityInitializer.InitializeDefaultAdminAccountsAsync(sp, configuration);
 
         await MembershipSeeder.SeedDefaultMemberships(sp);
+        await FaqSeeder.SeedDefaultFaq(sp);
 
         if (env.IsDevelopment())
         {
