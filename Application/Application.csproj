@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\Repositories\Bookings\" />
+    <Folder Include="Abstractions\Repositories\CustomerService\" />
     <Folder Include="Abstractions\Repositories\Faq\" />
     <Folder Include="Abstractions\Repositories\Memberships\" />
     <Folder Include="Abstractions\Repositories\TrainingSessions\" />
