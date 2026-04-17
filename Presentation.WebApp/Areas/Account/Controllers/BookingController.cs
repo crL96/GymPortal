@@ -16,14 +16,14 @@ public class BookingController(ITrainingSessionService sessionService, IBookingS
         if (bookingSearchDate == default)
             bookingSearchDate = DateTime.Now.Date;
 
-        var bookingsResult = await sessionService.GetByTimePeriodWithBookings(bookingSearchDate, bookingSearchDate.AddHours(24));
-        if (!bookingsResult.Succeeded || bookingsResult.Sessions is null)
+        var sessionsResult = await sessionService.GetByTimePeriodWithBookings(bookingSearchDate, bookingSearchDate.AddHours(24));
+        if (!sessionsResult.Succeeded || sessionsResult.Sessions is null)
         {
             TempData["SessionBookerError"] = "Failed to fetch sessions, try again later";
             return View(viewModel);
         }
 
-        viewModel.Sessions = bookingsResult.Sessions.Select(x => new TrainingSession()
+        viewModel.Sessions = sessionsResult.Sessions.Select(x => new TrainingSession()
         {
             Id = x.Id,
             Name = x.Name,
@@ -31,7 +31,30 @@ public class BookingController(ITrainingSessionService sessionService, IBookingS
             EndTime = x.EndTime,
             AvailableSpots = x.AvailableSpots,
             BookedIds = x.BookedIds
-        }).ToList();
+        }).OrderBy(x => x.StartTime).ToList();
+
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
+            return Redirect("sign-out");
+
+        var bookingResult = await bookingService.GetUserUpcomingBookings(userId);
+        if (!bookingResult.Succeeded || bookingResult.Bookings is null)
+        {
+            TempData["UpcomingBookingsError"] = "Failed to fetch upcoming bookings, try again later.";
+            return View(viewModel);
+        }
+
+        viewModel.UpcomingBookings = bookingResult.Bookings
+            .Select(x => new UpcomingBooking(
+                x.Id,
+                new(
+                    x.TrainingSession.Id,
+                    x.TrainingSession.Name,
+                    x.TrainingSession.StartTime,
+                    x.TrainingSession.EndTime
+                )))
+            .OrderBy(x => x.Session.StartTime)
+            .ToList();
 
         return View(viewModel);
     }
