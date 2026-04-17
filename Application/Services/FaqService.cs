@@ -1,30 +1,7 @@
-namespace Presentation.WebApp.Placeholders;
+using Application.Abstractions.Services.Faq;
+using Application.Dtos.Faq;
 
-public sealed record FaqItem
-(
-    int Id,
-    string Title,
-    string Content
-)
-{
-    public static FaqItem Create(int id, string title, string content) => new(id, title, content);
-}
-
-public sealed record FaqResult
-(
-    bool Succeeded,
-    IReadOnlyList<FaqItem>? Faqs = null,
-    string? ErrorMessage = null
-)
-{
-    public static FaqResult Ok(IReadOnlyList<FaqItem> faqs) => new(true, faqs);
-    public static FaqResult Failed(string errorMessage) => new(false, null, errorMessage);
-}
-
-public interface IFaqService
-{
-    Task<FaqResult> GetFaqsAsync();
-}
+namespace Application.Services;
 
 public class FaqService : IFaqService
 {

@@ -28,7 +28,6 @@
     <Folder Include="Dtos\Memberships\" />
     <Folder Include="Dtos\User\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
