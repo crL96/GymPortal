@@ -2,7 +2,7 @@ using Domain.Common.Exceptions;
 
 namespace Domain.Aggregates.TrainingSessions.ValueObjects;
 
-public class TrainingSessionId
+public sealed record TrainingSessionId
 {
     public Guid Value { get; private set; }
 

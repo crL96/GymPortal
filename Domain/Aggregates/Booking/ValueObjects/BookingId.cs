@@ -3,7 +3,7 @@ using Domain.Common.Exceptions;
 
 namespace Domain.Aggregates.Booking.ValueObjects;
 
-public class BookingId
+public sealed record BookingId
 {
     public Guid Value { get; private set; }
 
