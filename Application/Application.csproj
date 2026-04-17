@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\Repositories\Bookings\" />
+    <Folder Include="Abstractions\Repositories\Faq\" />
     <Folder Include="Abstractions\Repositories\Memberships\" />
     <Folder Include="Abstractions\Repositories\TrainingSessions\" />
     <Folder Include="Abstractions\Services\Bookings\" />
@@ -28,7 +29,6 @@
     <Folder Include="Dtos\Memberships\" />
     <Folder Include="Dtos\User\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

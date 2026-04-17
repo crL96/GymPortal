@@ -16,7 +16,6 @@
     <Folder Include="Areas\Authentication\Views\SignIn\" />
     <Folder Include="Models\" />
     <Folder Include="Models\Support\" />
-    <Folder Include="Placeholders\" />
     <Folder Include="Views\NotFound\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Memberships\" />

@@ -1,4 +1,5 @@
 using Application.Abstractions.Services.Bookings;
+using Application.Abstractions.Services.Faq;
 using Application.Abstractions.Services.Memberships;
 using Application.Abstractions.Services.TrainingSessions;
 using Application.Services;
@@ -19,6 +20,7 @@ public static class ApplicationServiceCollectionExtensions
         services.AddScoped<IUserMembershipService, UserMembershipService>();
         services.AddScoped<ITrainingSessionService, TrainingSessionService>();
         services.AddScoped<IBookingService, BookingService>();
+        services.AddScoped<IFaqService, FaqService>();
 
         return services;
     }

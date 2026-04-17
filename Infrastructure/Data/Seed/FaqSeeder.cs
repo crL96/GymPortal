@@ -1,47 +1,29 @@
-namespace Presentation.WebApp.Placeholders;
+using Application.Abstractions.Repositories.Faq;
+using Application.Dtos.Faq;
+using Microsoft.Extensions.DependencyInjection;
 
-public sealed record FaqItem
-(
-    int Id,
-    string Title,
-    string Content
-)
-{
-    public static FaqItem Create(int id, string title, string content) => new(id, title, content);
-}
+namespace Infrastructure.Data.Seed;
 
-public sealed record FaqResult
-(
-    bool Succeeded,
-    IReadOnlyList<FaqItem>? Faqs = null,
-    string? ErrorMessage = null
-)
+public class FaqSeeder
 {
-    public static FaqResult Ok(IReadOnlyList<FaqItem> faqs) => new(true, faqs);
-    public static FaqResult Failed(string errorMessage) => new(false, null, errorMessage);
-}
+    public static async Task SeedDefaultFaq(IServiceProvider sp)
+    {
+        await using var scope = sp.CreateAsyncScope();
+        var repo = scope.ServiceProvider.GetRequiredService<IFaqRepository>();
 
-public interface IFaqService
-{
-    Task<FaqResult> GetFaqsAsync();
-}
-
-public class FaqService : IFaqService
-{
-    private List<FaqItem> faqItems =
+        List<FaqItem> faqItems =
         [
             FaqItem.Create(
-                1,
-                "Do I need prior gym experience to Join CoreFitness?",
-                """
-                <p>No, CoreFitness is designed for all fitness levels. Our trainers guide beginners with proper techniques and structured workout plans to help them start safely and confidently.</p>
-                <ul>
-                    <li>Every new member receives a personalized introduction to equipments</li>
-                    <li>Workouts are designed to grow with you, ensuring beginners can start safely.</li>
-                </ul>
-                """
+            1,
+            "Do I need prior gym experience to Join CoreFitness?",
+            """
+            <p>No, CoreFitness is designed for all fitness levels. Our trainers guide beginners with proper techniques and structured workout plans to help them start safely and confidently.</p>
+            <ul>
+                <li>Every new member receives a personalized introduction to equipments</li>
+                <li>Workouts are designed to grow with you, ensuring beginners can start safely.</li>
+            </ul>
+            """
             ),
-
             FaqItem.Create(
                 2,
                 "What facilities are included with the membership?",
@@ -54,7 +36,6 @@ public class FaqService : IFaqService
                 </ul>
                 """
             ),
-
             FaqItem.Create(
                 3,
                 "Can I try the gym before taking a membership?",
@@ -66,7 +47,6 @@ public class FaqService : IFaqService
                 </ul>
                 """
             ),
-
             FaqItem.Create(
                 4,
                 "Are there group workout programs available?",
@@ -79,7 +59,6 @@ public class FaqService : IFaqService
                 </ul>
                 """
             ),
-
             FaqItem.Create(
                 5,
                 "Is nutrition guidance included in the plans?",
@@ -94,8 +73,10 @@ public class FaqService : IFaqService
             )
         ];
 
-    public async Task<FaqResult> GetFaqsAsync()
-    {
-        return FaqResult.Ok(faqItems);
+        foreach (var item in faqItems)
+        {
+            if (await repo.GetByIdAsync(item.Id) is null)
+                await repo.CreateAsync(item);
+        }
     }
 }

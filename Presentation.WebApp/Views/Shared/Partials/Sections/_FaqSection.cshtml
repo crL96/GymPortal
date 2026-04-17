@@ -1,4 +1,4 @@
-﻿@using Presentation.WebApp.Placeholders
+﻿@using Application.Abstractions.Services.Faq
 @inject IFaqService faqService
 @{
     var result = await faqService.GetFaqsAsync();
