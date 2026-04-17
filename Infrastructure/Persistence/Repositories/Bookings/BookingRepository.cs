@@ -2,6 +2,7 @@ using Application.Abstractions.Repositories.Bookings;
 using Application.Dtos.Bookings;
 using Domain.Aggregates.Booking;
 using Domain.Aggregates.Booking.ValueObjects;
+using Domain.Aggregates.TrainingSessions.ValueObjects;
 using Infrastructure.Persistence.Contexts;
 using Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,10 @@ public class BookingRepository(ApplicationDbContext context) :
     RepositoryBase<Booking, BookingId, BookingEntity, ApplicationDbContext>(context),
     IBookingRepository
 {
-    public async Task<IReadOnlyList<Booking>> GetBySessionId(Guid sessionId, CancellationToken ct = default)
+    public async Task<IReadOnlyList<Booking>> GetBySessionId(TrainingSessionId sessionId, CancellationToken ct = default)
     {
         var entities = await Set
-            .Where(x => x.TrainingSessionId.Value == sessionId)
+            .Where(x => x.TrainingSessionId == sessionId)
             .AsNoTracking()
             .ToListAsync(ct);
 

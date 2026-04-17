@@ -23,11 +23,13 @@ public class BookingService(
             if (string.IsNullOrWhiteSpace(userId))
                 return BookingResult.Failed("Invalid UserId");
 
-            var session = await sessionRepo.GetByIdAsync(TrainingSessionId.Recreate(sessionId));
+            var trainingSessionId = TrainingSessionId.Recreate(sessionId);
+
+            var session = await sessionRepo.GetByIdAsync(trainingSessionId);
             if (session is null)
                 return BookingResult.NotFound("Session not found");
 
-            var sessionBookings = await bookingRepo.GetBySessionId(sessionId, ct);
+            var sessionBookings = await bookingRepo.GetBySessionId(trainingSessionId, ct);
             var bookedUserIds = sessionBookings.Select(x => x.UserId).ToList();
 
             var userMembership = await userMembershipRepo.GetByIdAsync(userId, ct);
@@ -63,7 +65,7 @@ public class BookingService(
             return BookingListResult.Failed("Invalid UserId");
 
         var bookings = await bookingRepo.GetByUserId(userId, DateTime.Now, DateTime.Now.AddYears(1), ct);
-        return BookingListResult.Ok((List<BookingDto>)bookings);
+        return BookingListResult.Ok(bookings.ToList());
     }
 
     public async Task<BookingResult> RemoveBooking(Guid bookingId, CancellationToken ct = default)
