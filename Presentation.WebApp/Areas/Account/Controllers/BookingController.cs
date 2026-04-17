@@ -4,6 +4,7 @@ using Application.Abstractions.Services.TrainingSessions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApp.Areas.Account.Models;
+using Presentation.WebApp.Models.Common;
 
 namespace Presentation.WebApp.Areas.Account.Controllers;
 

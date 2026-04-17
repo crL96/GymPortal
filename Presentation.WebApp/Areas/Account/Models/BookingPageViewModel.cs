@@ -1,3 +1,5 @@
+using Presentation.WebApp.Models.Common;
+
 namespace Presentation.WebApp.Areas.Account.Models;
 
 public class BookingPageViewModel

@@ -1,4 +1,4 @@
-namespace Presentation.WebApp.Areas.Account.Models;
+namespace Presentation.WebApp.Models.Common;
 
 public class TrainingSession
 {

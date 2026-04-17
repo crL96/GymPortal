@@ -17,7 +17,6 @@
     <Folder Include="Areas\Admin\Views\Home\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\SignIn\" />
-    <Folder Include="Models\" />
     <Folder Include="Models\Support\" />
     <Folder Include="Views\NotFound\" />
     <Folder Include="Views\Home\" />
