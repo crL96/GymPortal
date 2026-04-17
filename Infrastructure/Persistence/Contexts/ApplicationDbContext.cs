@@ -15,6 +15,8 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, str
 
     public DbSet<MembershipEntity> Memberships => Set<MembershipEntity>();
     public DbSet<UserMembershipEntity> UserMembership => Set<UserMembershipEntity>();
+    public DbSet<BookingEntity> Bookings => Set<BookingEntity>();
+    public DbSet<TrainingSessionEntity> TrainingSessions => Set<TrainingSessionEntity>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -22,5 +24,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, str
 
         builder.ApplyConfiguration(new MembershipEntityConfiguration());
         builder.ApplyConfiguration(new UserMembershipEntityConfiguration());
+        builder.ApplyConfiguration(new BookingEntityConfiguration());
+        builder.ApplyConfiguration(new TrainingSessionEntityConfiguration());
     }
 }

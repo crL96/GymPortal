@@ -1,0 +1,11 @@
+﻿@model BookingPageViewModel
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/css/account/booking.css" asp-append-version="true" />
+}
+
+<partial name="Partials/_MyBookingsSection" model=@Model.UpcomingBookings />
+<partial name="Partials/_SessionBookerSection" model=@Model.Sessions />

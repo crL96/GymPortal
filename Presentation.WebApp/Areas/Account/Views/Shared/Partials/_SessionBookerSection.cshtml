@@ -1,0 +1,59 @@
+﻿@using System.Security.Claims
+@model List<TrainingSession>
+<section class="session-booker-section">
+    <h2>Book a Session</h2>
+
+    <form id="date-form" method="get" asp-area="Account" asp-controller="Booking" asp-action="Index">
+        <label class="form-label" for="bookingSearchDate">Select date: </label>
+        <input class="form-input" type="date" name="bookingSearchDate" id="bookingSearchDate"
+               min="@DateTime.Now.Date.ToShortDateString()" />
+        <button class="btn search" type="submit">Find sessions</button>
+    </form>
+
+    <div class="sessions-container">
+        @if (Model is not null)
+        {
+            @if (TempData["SessionBookerError"] is not null)
+            {
+                <p class="error-message">@TempData["SessionBookerError"]</p>
+            }
+            else if (Model.Count < 1)
+            {
+                <p>Looks like we haven't published any sessions for this date yet.</p>
+            }
+            @foreach (var session in Model)
+            {
+                <div class="session">
+                    <div class="session-info">
+                        <h4 class="session-name">@session.Name</h4>
+                        <p class="session-time">
+                            @session.StartTime.ToShortDateString() : @session.StartTime.ToShortTimeString() -
+                            @session.EndTime.ToShortTimeString()
+                        </p>
+                        <p class="session-spots">
+                            <strong>Participants:</strong> @session.BookedIds.Count / @session.AvailableSpots
+                        </p>
+                    </div>
+                    @if (session.BookedIds.Contains(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? ""))
+                    {
+                        <form method="post" asp-controller="Booking" asp-action="CancelBooking">
+                            <input type="hidden" id="sessionId" name="sessionId" value="@session.Id" />
+                            <button type="submit" class="btn cancel">Cancel booking</button>
+                        </form>
+                    }
+                    else if (session.BookedIds.Count < session.AvailableSpots)
+                    {
+                        <form method="post" asp-controller="Booking" asp-action="CreateBooking">
+                            <input type="hidden" id="sessionId" name="sessionId" value="@session.Id" />
+                            <button type="submit" class="btn">Book session</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p class="session-full">Session full</p>
+                    }
+                </div>
+            }
+        }
+    </div>
+</section>

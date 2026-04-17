@@ -1,5 +1,5 @@
 using Application.Abstractions.Repositories.Memberships;
-using Domain.Aggregates.UserMembership;
+using Domain.Aggregates.UserMemberships;
 using Infrastructure.Persistence.Contexts;
 using Infrastructure.Persistence.Entities;
 

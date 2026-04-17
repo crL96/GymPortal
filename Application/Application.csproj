@@ -17,10 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Abstractions\Repositories\Bookings\" />
     <Folder Include="Abstractions\Repositories\Memberships\" />
+    <Folder Include="Abstractions\Repositories\TrainingSessions\" />
+    <Folder Include="Abstractions\Services\Bookings\" />
     <Folder Include="Abstractions\Services\Memberships\" />
-    <Folder Include="Dtos\" />
+    <Folder Include="Abstractions\Services\TrainingSessions\" />
     <Folder Include="Dtos\Auth\" />
+    <Folder Include="Dtos\Bookings\" />
     <Folder Include="Dtos\Memberships\" />
     <Folder Include="Dtos\User\" />
     <Folder Include="Extensions\" />

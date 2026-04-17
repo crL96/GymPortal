@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Aggregates\Booking\Exceptions\" />
+    <Folder Include="Aggregates\Booking\ValueObjects\" />
     <Folder Include="Aggregates\Membership\Exceptions\" />
     <Folder Include="Aggregates\Membership\ValueObjects\" />
-    <Folder Include="Aggregates\UserMembership\" />
-    <Folder Include="Common\" />
+    <Folder Include="Aggregates\TrainingSessions\" />
+    <Folder Include="Aggregates\UserMemberships\" />
     <Folder Include="Common\Exceptions\" />
   </ItemGroup>
 

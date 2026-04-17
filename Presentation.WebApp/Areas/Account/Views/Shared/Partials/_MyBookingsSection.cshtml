@@ -1,0 +1,35 @@
+﻿@using System.Security.Claims
+@model List<UpcomingBooking>
+<section class="my-bookings-section">
+    <h2>Upcoming bookings</h2>
+
+    <div class="bookings-container">
+        @if (Model is not null)
+        {
+            @foreach (var booking in Model)
+            {
+                <div class="booking">
+                    <div class="booking-info">
+                        <h4 class="session-name">@booking.Session.Name</h4>
+                        <p class="session-time">
+                            @booking.Session.StartTime.ToShortDateString() : @booking.Session.StartTime.ToShortTimeString() -
+                            @booking.Session.EndTime.ToShortTimeString()
+                        </p>
+                    </div>
+                    <form method="post" asp-controller="Booking" asp-action="CancelBooking">
+                        <input type="hidden" id="sessionId" name="sessionId" value="@booking.Session.Id" />
+                        <button type="submit" class="btn cancel">Cancel booking</button>
+                    </form>
+                </div>
+            }
+            @if (TempData["UpcomingBookingsError"] is not null)
+            {
+                <p class="error-message">@TempData["UpcomingBookingsError"]</p>
+            }
+            else if (Model.Count < 1)
+            {
+                <p>Looks like you don't have any upcoming bookings</p>
+            }
+        }
+    </div>
+</section>

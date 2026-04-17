@@ -1,12 +1,12 @@
 using Domain.Common.Exceptions;
 
-namespace Domain.Aggregates.Membership.ValueObjects;
+namespace Domain.Aggregates.TrainingSessions.ValueObjects;
 
-public sealed record MembershipId
+public sealed record TrainingSessionId
 {
     public Guid Value { get; private set; }
 
-    public static MembershipId Create()
+    public static TrainingSessionId Create()
     {
         return new()
         {
@@ -14,7 +14,7 @@ public sealed record MembershipId
         };
     }
 
-    public static MembershipId Recreate(Guid id)
+    public static TrainingSessionId Recreate(Guid id)
     {
         if (id == Guid.Empty)
             throw new InvalidIdDomainException("Id cannot be an empty GUID");
