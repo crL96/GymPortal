@@ -52,4 +52,14 @@
       margin: 0.5rem 0 1rem;
     }
   }
+
+  .btn.cancel {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+  }
+
+  .session-full {
+    font-size: 1rem;
+    font-weight: bold;
+  }
 }

@@ -1,4 +1,5 @@
-﻿@model List<TrainingSession>
+﻿@using System.Security.Claims
+@model List<TrainingSession>
 <section class="session-booker-section">
     <h2>Book a Session</h2>
 
@@ -25,10 +26,24 @@
                             <strong>Participants:</strong> @session.BookedIds.Count / @session.AvailableSpots
                         </p>
                     </div>
-                    <form method="post" asp-controller="Booking" asp-action="CreateBooking">
-                        <input type="hidden" id="sessionId" name="sessionId" value="@session.Id" />
-                        <button type="submit" class="btn">Book session</button>
-                    </form>
+                    @if (session.BookedIds.Contains(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? ""))
+                    {
+                        <form method="post" asp-controller="Booking" asp-action="CancelBooking">
+                            <input type="hidden" id="sessionId" name="sessionId" value="@session.Id" />
+                            <button type="submit" class="btn cancel">Cancel booking</button>
+                        </form>
+                    }
+                    else if (session.BookedIds.Count < session.AvailableSpots)
+                    {
+                        <form method="post" asp-controller="Booking" asp-action="CreateBooking">
+                            <input type="hidden" id="sessionId" name="sessionId" value="@session.Id" />
+                            <button type="submit" class="btn">Book session</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p class="session-full">Session full</p>
+                    }
                 </div>
             }
             @if (TempData["SessionBookerError"] is not null)

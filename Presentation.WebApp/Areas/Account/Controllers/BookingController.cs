@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Application.Abstractions.Services.Bookings;
 using Application.Abstractions.Services.TrainingSessions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +9,7 @@ namespace Presentation.WebApp.Areas.Account.Controllers;
 
 [Area("Account")]
 [Authorize]
-public class BookingController(ITrainingSessionService sessionService) : Controller
+public class BookingController(ITrainingSessionService sessionService, IBookingService bookingService) : Controller
 {
     public async Task<IActionResult> Index(BookingPageViewModel viewModel, DateTime bookingSearchDate = default)
     {
@@ -34,4 +36,36 @@ public class BookingController(ITrainingSessionService sessionService) : Control
         return View(viewModel);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateBooking(Guid sessionId)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
+            return Redirect("sign-out");
+
+        var result = await bookingService.CreateBooking(sessionId, userId);
+        if (!result.Succeeded)
+        {
+            TempData["SessionBookerError"] = result.ErrorMessage ?? "Could not create booking";
+        }
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CancelBooking(Guid sessionId)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
+            return Redirect("sign-out");
+
+
+        var result = await bookingService.RemoveBookingByUserAndSession(sessionId, userId);
+        if (!result.Succeeded)
+        {
+            TempData["SessionBookerError"] = result.ErrorMessage ?? "Could not create booking";
+        }
+        return RedirectToAction(nameof(Index));
+    }
 }
