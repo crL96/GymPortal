@@ -37,24 +37,17 @@ public class TrainingSessionRepository(ApplicationDbContext context) :
 
     public async Task<IReadOnlyList<TrainingSessionDto>> GetByTimePeriodWithBookings(DateTime startTime, DateTime endTime, CancellationToken ct)
     {
-        var sessionEntities = await Set
+        var sessions = await Set
             .Where(x => x.StartTime < endTime && x.EndTime > startTime)
-            .Include(x => x.Bookings)
-            .AsNoTracking()
-            .ToListAsync(ct);
-
-        var sessions = new List<TrainingSessionDto>();
-        foreach (var entity in sessionEntities)
-        {
-            sessions.Add(new(
+            .Select(entity => new TrainingSessionDto(
                 entity.Id.Value,
                 entity.Name,
                 entity.StartTime,
                 entity.EndTime,
                 entity.AvailableSpots,
-                entity.Bookings.Select(x => x.UserId).ToList()
-            ));
-        }
+                entity.Bookings.Select(b => b.UserId).ToList()))
+            .AsNoTracking()
+            .ToListAsync(ct);
 
         return sessions;
     }

@@ -11,7 +11,7 @@ public class TrainingSessionService(ITrainingSessionRepository sessionRepo) : IT
         try
         {
             var sessions = await sessionRepo.GetByTimePeriodWithBookings(startTime, endTime, ct);
-            return TrainingSessionListResult.Ok((List<TrainingSessionDto>)sessions);
+            return TrainingSessionListResult.Ok(sessions.ToList());
         }
         catch (Exception ex)
         {
