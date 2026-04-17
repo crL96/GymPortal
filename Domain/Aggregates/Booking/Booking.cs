@@ -22,7 +22,7 @@ public class Booking
         if (string.IsNullOrWhiteSpace(userId))
             throw new InvalidIdDomainException("UserId cannot be null or empty");
 
-        var id = new BookingId();
+        var id = BookingId.Create();
         return new(id, userId, trainingSessionId);
     }
 

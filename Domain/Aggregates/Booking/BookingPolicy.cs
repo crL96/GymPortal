@@ -8,7 +8,7 @@ public static class BookingPolicy
 {
     public static Booking CreateBooking(TrainingSession session, UserMembership? userMembership, List<string> bookedUserIds)
     {
-        if (userMembership is null || userMembership.IsActive)
+        if (userMembership is null || !userMembership.IsActive)
             throw new InvalidMembershipDomainException();
 
         if (session.IsFull(bookedUserIds.Count))
