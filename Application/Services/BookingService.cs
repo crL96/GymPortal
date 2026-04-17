@@ -75,4 +75,12 @@ public class BookingService(
             BookingResult.Ok() :
             BookingResult.Failed("Failed to remove booking");
     }
+
+    public async Task<BookingResult> RemoveBookingByUserAndSession(Guid sessionId, string userId, CancellationToken ct = default)
+    {
+        var success = await bookingRepo.DeleteByUserAndSessionIdAsync(userId, TrainingSessionId.Recreate(sessionId), ct);
+        return success ?
+            BookingResult.Ok() :
+            BookingResult.Failed("Failed to remove booking");
+    }
 }

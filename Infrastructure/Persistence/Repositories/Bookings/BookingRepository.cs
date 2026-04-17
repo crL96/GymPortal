@@ -13,6 +13,24 @@ public class BookingRepository(ApplicationDbContext context) :
     RepositoryBase<Booking, BookingId, BookingEntity, ApplicationDbContext>(context),
     IBookingRepository
 {
+    public async Task<bool> DeleteByUserAndSessionIdAsync(string userId, TrainingSessionId sessionId, CancellationToken ct = default)
+    {
+        try
+        {
+            var entity = await Set.FirstOrDefaultAsync(x => x.TrainingSessionId == sessionId && x.UserId == userId, ct);
+            if (entity == null)
+                return false;
+
+            Set.Remove(entity);
+            await _context.SaveChangesAsync(ct);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public async Task<IReadOnlyList<Booking>> GetBySessionId(TrainingSessionId sessionId, CancellationToken ct = default)
     {
         var entities = await Set
