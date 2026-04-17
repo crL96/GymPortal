@@ -13,6 +13,14 @@
     <div class="sessions-container">
         @if (Model is not null)
         {
+            @if (TempData["SessionBookerError"] is not null)
+            {
+                <p class="error-message">@TempData["SessionBookerError"]</p>
+            }
+            else if (Model.Count < 1)
+            {
+                <p>Looks like we haven't published any sessions for this date yet.</p>
+            }
             @foreach (var session in Model)
             {
                 <div class="session">
@@ -45,14 +53,6 @@
                         <p class="session-full">Session full</p>
                     }
                 </div>
-            }
-            @if (TempData["SessionBookerError"] is not null)
-            {
-                <p class="error-message">@TempData["SessionBookerError"]</p>
-            }
-            @if (Model.Count < 1 && TempData["SessionBookerError"] is null)
-            {
-                <p>Looks like we haven't published any sessions for this date yet.</p>
             }
         }
     </div>
