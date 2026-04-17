@@ -21,7 +21,7 @@
             @if (User.Identity?.IsAuthenticated == true)
             {
                 <li class="menu-item">
-                    <a class="menu-item-link" href="/">
+                    <a class="menu-item-link" asp-area="Account" asp-action="Index" asp-controller="Booking">
                         Our Classes
                     </a>
                 </li>
