@@ -26,7 +26,7 @@ public static class PersistenceServiceCollectionExtensions
 
             services.AddSingleton<SqliteConnection>(_ =>
             {
-                var conn = new SqliteConnection(configuration.GetConnectionString("SqlConnection"));
+                var conn = new SqliteConnection(configuration.GetConnectionString("DevDbConnection") ?? "Data Source=:memory:;");
                 conn.Open();
                 return conn;
             });
