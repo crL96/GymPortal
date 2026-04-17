@@ -12,6 +12,9 @@
     <Folder Include="Areas\Account\Models\" />
     <Folder Include="Areas\Account\Views\Booking\" />
     <Folder Include="Areas\Account\Views\Membership\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Home\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\SignIn\" />
     <Folder Include="Models\" />

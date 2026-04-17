@@ -1,0 +1,72 @@
+.admin-layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "header header" "aside main";
+  height: 100dvh;
+
+  .page-title {
+    margin-top: 0;
+    text-align: start;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  header {
+    border-radius: 0;
+    grid-area: header;
+  }
+
+  aside {
+    grid-area: aside;
+    background-color: var(--section-background-color);
+  }
+
+  main {
+    grid-area: main;
+    padding: 2rem;
+  }
+}
+
+.admin-menu-section {
+  background-color: var(--section-background-color);
+
+  .admin-menu-title {
+    background-color: var(--admin-menu-title-background-color);
+    padding: 1rem 1.5rem;
+  }
+
+  .menu.admin {
+    display: block;
+
+    .menu-item {
+      margin: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      &::after {
+        content: "\f054";
+        font-family: var(--font-fa);
+        font-weight: 900;
+        font-size: 1rem;
+        margin-left: 2rem;
+      }
+
+      &:hover {
+        color: var(--menu-link-hover-color);
+      }
+    }
+
+    .menu-item:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .menu-item-link {
+      color: inherit;
+      display: inline-block;
+      width: 100%;
+      padding: 1rem 0;
+    }
+  }
+}
