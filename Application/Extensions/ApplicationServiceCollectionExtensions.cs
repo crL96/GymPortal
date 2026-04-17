@@ -1,4 +1,5 @@
 using Application.Abstractions.Services.Bookings;
+using Application.Abstractions.Services.CustomerService;
 using Application.Abstractions.Services.Faq;
 using Application.Abstractions.Services.Memberships;
 using Application.Abstractions.Services.TrainingSessions;
@@ -21,6 +22,7 @@ public static class ApplicationServiceCollectionExtensions
         services.AddScoped<ITrainingSessionService, TrainingSessionService>();
         services.AddScoped<IBookingService, BookingService>();
         services.AddScoped<IFaqService, FaqService>();
+        services.AddScoped<IContactService, ContactService>();
 
         return services;
     }

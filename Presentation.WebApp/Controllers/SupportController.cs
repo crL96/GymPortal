@@ -1,9 +1,11 @@
+using Application.Abstractions.Services.CustomerService;
+using Application.Dtos.CustomerService;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApp.Models.Support;
 
 namespace Presentation.WebApp.Controllers;
 
-public class SupportController : Controller
+public class SupportController(IContactService contactService) : Controller
 {
     public IActionResult Index()
     {
@@ -12,12 +14,25 @@ public class SupportController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Index(ContactForm form)
+    public async Task<IActionResult> Index(ContactForm form)
     {
         if (!ModelState.IsValid)
             return View(form);
 
-        //TODO - handle the form submit
+        var dto = new ContactRequest(null,
+            form.FirstName,
+            form.LastName,
+            form.Email,
+            form.Phone,
+            form.Message,
+            form.AcceptSavePersonalInformation,
+            DateTime.UtcNow
+        );
+        var result = await contactService.SaveContactRequest(dto);
+        if (!result.Succeeded)
+            TempData["FormSubmitMessage"] = "Could not submit form, please try again later.";
+        else
+            TempData["FormSubmitMessage"] = "We have received your message and will get back to you.";
 
         return View();
     }

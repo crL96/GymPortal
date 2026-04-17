@@ -1,9 +1,11 @@
 using Application.Abstractions.Repositories.Bookings;
+using Application.Abstractions.Repositories.CustomerService;
 using Application.Abstractions.Repositories.Faq;
 using Application.Abstractions.Repositories.Memberships;
 using Application.Abstractions.Repositories.TrainingSessions;
 using Infrastructure.Persistence.Contexts;
 using Infrastructure.Persistence.Repositories.Bookings;
+using Infrastructure.Persistence.Repositories.CustomerService;
 using Infrastructure.Persistence.Repositories.Faq;
 using Infrastructure.Persistence.Repositories.Memberships;
 using Infrastructure.Persistence.Repositories.TrainingSessions;
@@ -51,6 +53,7 @@ public static class PersistenceServiceCollectionExtensions
         services.AddScoped<ITrainingSessionRepository, TrainingSessionRepository>();
         services.AddScoped<IBookingRepository, BookingRepository>();
         services.AddScoped<IFaqRepository, FaqRepository>();
+        services.AddScoped<IContactRequestRepository, ContactRequestRepository>();
 
         return services;
     }
