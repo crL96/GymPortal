@@ -1,0 +1,10 @@
+﻿@model SessionPageViewModel
+@{
+    ViewData["Title"] = "Manage Sessions";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/css/admin/sessions.css" asp-append-version="true" />
+}
+
+<partial name="Partials/_SessionHandlerSection" model=@Model.Sessions />

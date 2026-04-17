@@ -1,0 +1,43 @@
+﻿@model List<TrainingSession>
+<section class="session-handler-section">
+    <h2>Existing sessions</h2>
+
+    <form id="date-form" method="get" asp-area="Admin" asp-controller="Session" asp-action="Index">
+        <label class="form-label" for="bookingSearchDate">Select date: </label>
+        <input class="form-input" type="date" name="sessionSearchDate" id="sessionSearchDate" />
+        <button class="btn search" type="submit">Find sessions</button>
+    </form>
+
+    <div class="sessions-container">
+        @if (Model is not null)
+        {
+            @if (TempData["SessionHandlerError"] is not null)
+            {
+                <p class="error-message">@TempData["SessionHandlerError"]</p>
+            }
+            else if (Model.Count < 1)
+            {
+                <p>Looks like we haven't published any sessions for this date yet.</p>
+            }
+            @foreach (var session in Model)
+            {
+                <div class="session">
+                    <div class="session-info">
+                        <h4 class="session-name">@session.Name</h4>
+                        <p class="session-time">
+                            @session.StartTime.ToShortDateString() : @session.StartTime.ToShortTimeString() -
+                            @session.EndTime.ToShortTimeString()
+                        </p>
+                        <p class="session-spots">
+                            <strong>Participants:</strong> @session.BookedIds.Count / @session.AvailableSpots
+                        </p>
+                    </div>
+                    <form method="post" asp-area="Admin" asp-controller="Session" asp-action="DeleteSession">
+                        <input type="hidden" id="sessionId" name="sessionId" value="@session.Id" />
+                        <button type="submit" class="btn delete">Delete session</button>
+                    </form>
+                </div>
+            }
+        }
+    </div>
+</section>
