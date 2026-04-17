@@ -13,12 +13,12 @@ public class TrainingSessionSeeder
 
         var sessions = new List<TrainingSession>()
         {
-            TrainingSession.Create("Spinning with Sandra", DateTime.Now.Date.AddHours(12), DateTime.Now.Date.AddHours(13), 20),
-            TrainingSession.Create("Gym introduction with Brian", DateTime.Now.Date.AddHours(15), DateTime.Now.Date.AddHours(16), 8),
-            TrainingSession.Create("BodyPump with John", DateTime.Now.Date.AddHours(18), DateTime.Now.Date.AddHours(19), 25),
+            TrainingSession.Create("Spinning with Sandra", DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), 20),
+            TrainingSession.Create("Gym introduction with Brian", DateTime.Now.AddHours(3), DateTime.Now.AddHours(4), 8),
+            TrainingSession.Create("BodyPump with John", DateTime.Now.AddHours(7), DateTime.Now.AddHours(8), 25),
 
-            TrainingSession.Create("Spinning with Sandra", DateTime.Now.Date.AddDays(1).AddHours(12), DateTime.Now.Date.AddDays(1).AddHours(13), 20),
-            TrainingSession.Create("BodyPump with John", DateTime.Now.Date.AddDays(1).AddHours(18), DateTime.Now.Date.AddDays(1).AddHours(19), 25),
+            TrainingSession.Create("Spinning with Sandra", DateTime.Now.AddDays(1).AddHours(1), DateTime.Now.AddDays(1).AddHours(2), 20),
+            TrainingSession.Create("BodyPump with John", DateTime.Now.AddDays(1).AddHours(7), DateTime.Now.AddDays(1).AddHours(8), 25),
         };
 
         foreach (var session in sessions)
