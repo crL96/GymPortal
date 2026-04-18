@@ -11,9 +11,9 @@
     <div class="sessions-container">
         @if (Model is not null)
         {
-            @if (TempData["SessionHandlerError"] is not null)
+            @if (TempData["SessionHandlerMessage"] is not null)
             {
-                <p class="error-message">@TempData["SessionHandlerError"]</p>
+                <p>@TempData["SessionHandlerMessage"]</p>
             }
             else if (Model.Count < 1)
             {

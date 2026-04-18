@@ -1,4 +1,6 @@
+using System.Security.Claims;
 using Application.Abstractions.Services.TrainingSessions;
+using Application.Dtos.TrainingSessions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApp.Areas.Admin.Models;
@@ -10,7 +12,7 @@ namespace Presentation.WebApp.Areas.Admin.Controllers;
 [Authorize(Roles = "Admin")]
 public class SessionController(ITrainingSessionService sessionService) : Controller
 {
-    public async Task<IActionResult> IndexAsync(SessionPageViewModel viewModel, DateTime sessionSearchDate = default)
+    public async Task<IActionResult> Index(SessionPageViewModel viewModel, DateTime sessionSearchDate = default)
     {
         if (sessionSearchDate == default)
             sessionSearchDate = DateTime.Now.Date;
@@ -18,7 +20,7 @@ public class SessionController(ITrainingSessionService sessionService) : Control
         var sessionsResult = await sessionService.GetByTimePeriodWithBookings(sessionSearchDate, sessionSearchDate.AddHours(24));
         if (!sessionsResult.Succeeded || sessionsResult.Sessions is null)
         {
-            TempData["SessionBookerError"] = "Failed to fetch sessions, try again later";
+            TempData["SessionHandlerMessage"] = "Failed to fetch sessions, try again later";
             return View(viewModel);
         }
 
@@ -33,6 +35,28 @@ public class SessionController(ITrainingSessionService sessionService) : Control
         }).OrderBy(x => x.StartTime).ToList();
 
         return View(viewModel);
+    }
+
+    public async Task<IActionResult> DeleteSession(Guid sessionId)
+    {
+        if (User.FindFirstValue(ClaimTypes.Role) is null)
+            return Redirect("/sign-out");
+
+        var result = await sessionService.DeleteSessionAsync(sessionId, User.FindFirstValue(ClaimTypes.Role)!);
+
+        if (result.Succeeded)
+        {
+            TempData["SessionHandlerMessage"] = "Session deleted successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+        if (result.ErrorType == DeleteSessionErrorType.Unauthorized)
+            return Redirect("/sign-out");
+
+        if (result.ErrorType == DeleteSessionErrorType.InvalidId)
+            TempData["SessionHandlerMessage"] = "Invalid session id, could not delete";
+
+        TempData["SessionHandlerMessage"] = "Something went wrong, failed to delete";
+        return RedirectToAction(nameof(Index));
     }
 
 }
