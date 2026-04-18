@@ -115,4 +115,13 @@ public class IdentityAuthService(SignInManager<AppUser> signInManager, UserManag
         await signInManager.SignInAsync(user, isPersistent: false);
         return AuthResult.Ok();
     }
+
+    public async Task<bool> IsUserAdmin(string userId)
+    {
+        var user = await userManager.FindByIdAsync(userId);
+        if (user is null)
+            return false;
+
+        return await userManager.IsInRoleAsync(user, "Admin");
+    }
 }

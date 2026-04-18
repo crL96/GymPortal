@@ -1,4 +1,5 @@
 using Application.Abstractions.Repositories.TrainingSessions;
+using Application.Abstractions.Services.Auth;
 using Application.Abstractions.Services.TrainingSessions;
 using Application.Dtos.TrainingSessions;
 using Domain.Aggregates.TrainingSessions;
@@ -7,13 +8,13 @@ using Domain.Common.Exceptions;
 
 namespace Application.Services;
 
-public class TrainingSessionService(ITrainingSessionRepository sessionRepo) : ITrainingSessionService
+public class TrainingSessionService(ITrainingSessionRepository sessionRepo, IAuthService authService) : ITrainingSessionService
 {
-    public async Task<CreateSessionResult> CreateSessionAsync(CreateSessionDto dto, string role, CancellationToken ct = default)
+    public async Task<CreateSessionResult> CreateSessionAsync(CreateSessionDto dto, string userId, CancellationToken ct = default)
     {
         try
         {
-            if (role != "Admin")
+            if (!await authService.IsUserAdmin(userId))
                 return CreateSessionResult.Failed("User is not an admin");
 
             var session = TrainingSession.Create(dto.Name, dto.StartTime, dto.EndTime, dto.AvailableSpots);
@@ -31,11 +32,11 @@ public class TrainingSessionService(ITrainingSessionRepository sessionRepo) : IT
 
     }
 
-    public async Task<DeleteSessionResult> DeleteSessionAsync(Guid sessionId, string role, CancellationToken ct = default)
+    public async Task<DeleteSessionResult> DeleteSessionAsync(Guid sessionId, string userId, CancellationToken ct = default)
     {
         try
         {
-            if (role != "Admin")
+            if (!await authService.IsUserAdmin(userId))
                 return DeleteSessionResult.Unauthorized();
 
             var deleted = await sessionRepo.DeleteAsync(TrainingSessionId.Recreate(sessionId), ct);

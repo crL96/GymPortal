@@ -42,10 +42,11 @@ public class SessionController(ITrainingSessionService sessionService) : Control
     [HttpPost]
     public async Task<IActionResult> DeleteSession(Guid sessionId)
     {
-        if (User.FindFirstValue(ClaimTypes.Role) is null)
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
             return Redirect("/sign-out");
 
-        var result = await sessionService.DeleteSessionAsync(sessionId, User.FindFirstValue(ClaimTypes.Role)!);
+        var result = await sessionService.DeleteSessionAsync(sessionId, userId);
 
         if (result.Succeeded)
         {
@@ -65,8 +66,8 @@ public class SessionController(ITrainingSessionService sessionService) : Control
     [HttpPost]
     public async Task<IActionResult> CreateSession(SessionPageViewModel viewModel)
     {
-        var role = User.FindFirstValue(ClaimTypes.Role);
-        if (role != "Admin")
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
             return Redirect("/sign-out");
 
         if (viewModel.CreateSessionForm.StartTime < DateTime.Now)
@@ -85,7 +86,7 @@ public class SessionController(ITrainingSessionService sessionService) : Control
             viewModel.CreateSessionForm.AvailableSpots
         );
 
-        var result = await sessionService.CreateSessionAsync(dto, role);
+        var result = await sessionService.CreateSessionAsync(dto, userId);
         if (!result.Succeeded)
         {
             TempData["create-session-message"] = result.ErrorMessage ?? "Something went wrong";

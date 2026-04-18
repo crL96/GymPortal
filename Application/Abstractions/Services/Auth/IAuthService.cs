@@ -9,4 +9,5 @@ public interface IAuthService
     Task<AuthResult> SignInExternalUserAsync(string? roleName = null);
     Task SignOutUserAsync();
     Task<bool> UserExists(string email);
+    Task<bool> IsUserAdmin(string userId);
 }
