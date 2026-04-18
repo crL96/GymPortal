@@ -185,21 +185,6 @@ mobile-btn,
   }
 }
 
-.mobile-btn {
-  padding: 0.8rem 0.8rem;
-  border-radius: 10px;
-  height: 50px;
-  width: 50px;
-
-  &::after {
-    content: "\f0c9";
-    font-family: var(--font-fa);
-    font-weight: 400;
-    font-size: 1.2rem;
-    margin-left: 0rem;
-  }
-}
-
 .btn-accent {
   color: var(--button-text-color);
   background-color: var(--button-background-color);
