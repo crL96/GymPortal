@@ -65,6 +65,10 @@ public class SessionController(ITrainingSessionService sessionService) : Control
     [HttpPost]
     public async Task<IActionResult> CreateSession(SessionPageViewModel viewModel)
     {
+        var role = User.FindFirstValue(ClaimTypes.Role);
+        if (role != "Admin")
+            return Redirect("/sign-out");
+
         if (viewModel.CreateSessionForm.StartTime < DateTime.Now)
             ModelState.AddModelError("CreateSessionForm.StartTime", "Start time cannot be in the past");
 
@@ -73,6 +77,20 @@ public class SessionController(ITrainingSessionService sessionService) : Control
 
         if (!ModelState.IsValid)
             return View(nameof(Index), viewModel);
+
+        var dto = CreateSessionDto.Create(
+            viewModel.CreateSessionForm.Name,
+            viewModel.CreateSessionForm.StartTime,
+            viewModel.CreateSessionForm.EndTime,
+            viewModel.CreateSessionForm.AvailableSpots
+        );
+
+        var result = await sessionService.CreateSessionAsync(dto, role);
+        if (!result.Succeeded)
+        {
+            TempData["create-session-message"] = result.ErrorMessage ?? "Something went wrong";
+            return View(nameof(Index), viewModel);
+        }
 
         TempData["create-session-message"] = "Session created successfully";
         return RedirectToAction(nameof(Index));
