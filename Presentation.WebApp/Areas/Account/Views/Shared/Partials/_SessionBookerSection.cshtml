@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using SQLitePCL
 @model List<TrainingSession>
 <section class="session-booker-section">
     <h2>Book a Session</h2>
@@ -34,7 +35,11 @@
                             <strong>Participants:</strong> @session.BookedIds.Count / @session.AvailableSpots
                         </p>
                     </div>
-                    @if (session.BookedIds.Contains(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? ""))
+                    @if (session.StartTime < DateTime.Now)
+                    {
+                        <p class="session-started">Session started</p>
+                    }
+                    else if (session.BookedIds.Contains(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? ""))
                     {
                         <form method="post" asp-controller="Booking" asp-action="CancelBooking">
                             <input type="hidden" id="sessionId" name="sessionId" value="@session.Id" />

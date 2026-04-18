@@ -67,7 +67,8 @@
     }
   }
 
-  .session-full {
+  .session-full,
+  .session-started {
     font-size: 1rem;
     font-weight: bold;
   }
