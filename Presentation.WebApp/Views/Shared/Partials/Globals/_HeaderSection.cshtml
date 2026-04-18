@@ -20,14 +20,28 @@
         <ul class="menu">
             @if (User.Identity?.IsAuthenticated == true)
             {
-                <li class="menu-item">
-                    <a class="menu-item-link" asp-area="Account" asp-action="Index" asp-controller="Booking">
-                        Our Classes
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn btn-accent" asp-area="Account" asp-action="Index" asp-controller="Home">My Account</a>
-                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="menu-item">
+                        <a class="menu-item-link" asp-area="Account" asp-action="Index" asp-controller="Home">
+                            My Account
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="btn btn-accent" asp-area="Admin" asp-action="Index" asp-controller="Home">Admin</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="menu-item">
+                        <a class="menu-item-link" asp-area="Account" asp-action="Index" asp-controller="Booking">
+                            Our Classes
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="btn btn-accent" asp-area="Account" asp-action="Index" asp-controller="Home">My Account</a>
+                    </li>
+                }
             }
             else
             {

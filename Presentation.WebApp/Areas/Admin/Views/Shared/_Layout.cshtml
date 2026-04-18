@@ -1,0 +1,39 @@
+﻿@{
+    var pageTitle = ViewData["Title"]?.ToString();
+    var title = !string.IsNullOrWhiteSpace(pageTitle)
+        ? $"{pageTitle} | CoreFitness"
+        : "CoreFitness | Gym & Fitness Center";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/css/fonts.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin/admin-site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Presentation.WebApp.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("Css", required: false)
+</head>
+
+<body>
+    <div class="admin-layout">
+        <aside class="admin-side-menu">
+            <partial name="Partials/_AdminSideMenu" />
+        </aside>
+        <main>
+            <partial name="Partials/Globals/_PageTitleSection" />
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

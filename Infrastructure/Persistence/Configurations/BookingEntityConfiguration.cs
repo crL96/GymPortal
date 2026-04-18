@@ -34,7 +34,7 @@ internal sealed class BookingEntityConfiguration : IEntityTypeConfiguration<Book
         builder.HasOne(x => x.TrainingSession)
             .WithMany(x => x.Bookings)
             .HasForeignKey(x => x.TrainingSessionId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(x => x.User)
             .WithMany()

@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/css/admin/dashboard.css" asp-append-version="true" />
+}
+
+<section class="admin-dashboard-section">
+    <h2>Welcome To The Admin Dashboard!</h2>
+    <a class="btn" asp-area="Admin" asp-controller="Session" asp-action="Index">
+        Get Started
+    </a>
+</section>

@@ -103,7 +103,12 @@ public class SignInController(IAuthService authService, SignInManager<AppUser> s
     private RedirectResult? GetRedirectIfSignedIn()
     {
         if (User.Identity?.IsAuthenticated == true)
+        {
+            if (User.IsInRole("Admin"))
+                return Redirect("/admin");
+
             return Redirect("/account");
+        }
 
         return null;
     }
