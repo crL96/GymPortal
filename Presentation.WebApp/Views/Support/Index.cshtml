@@ -11,3 +11,17 @@
 <partial name="Partials/Sections/_ContactFormSection" />
 <partial name="Partials/Sections/_FaqSection" />
 
+
+@section Scripts {
+    <partial name="Partials/Globals/_ValidationScripts" />
+
+    <script>
+        $(function () {
+            setupCheckboxValidation({
+                formId: "#contact-form",
+                checkboxId: "#AcceptSavePersonalInformation",
+                message: "You must allow us to save personal information in order to contact you"
+            });
+        });
+    </script>
+}

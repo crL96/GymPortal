@@ -39,7 +39,7 @@
         <button data-type="submit" class="btn" type="submit">Continue</button>
 
         <div data-type="error" class="form-errormessage">
-            <span class="field-validation-error" asp-validation-for="ErrorMessage"></span>
+            <span class="field-validation" asp-validation-for="ErrorMessage"></span>
         </div>
 
         <div asp-validation-summary="ModelOnly"></div>
@@ -48,3 +48,18 @@
     </form>
 
 </section>
+
+
+@section Scripts {
+    <partial name="Partials/Globals/_ValidationScripts" />
+
+    <script>
+        $(function () {
+            setupCheckboxValidation({
+                formId: "#setEmailForm",
+                checkboxId: "#TermsAndConditions",
+                message: "Accepting the user terms & conditions is required"
+            });
+        });
+    </script>
+}
