@@ -3,6 +3,7 @@ using Application.Abstractions.Services.TrainingSessions;
 using Application.Dtos.TrainingSessions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.WebApp.Areas.Account.Models;
 using Presentation.WebApp.Areas.Admin.Models;
 using Presentation.WebApp.Models.Common;
 
@@ -14,6 +15,7 @@ public class SessionController(ITrainingSessionService sessionService) : Control
 {
     public async Task<IActionResult> Index(SessionPageViewModel viewModel, DateTime sessionSearchDate = default)
     {
+        ModelState.Remove("CreateSessionForm.Name");
         if (sessionSearchDate == default)
             sessionSearchDate = DateTime.Now.Date;
 
@@ -37,6 +39,7 @@ public class SessionController(ITrainingSessionService sessionService) : Control
         return View(viewModel);
     }
 
+    [HttpPost]
     public async Task<IActionResult> DeleteSession(Guid sessionId)
     {
         if (User.FindFirstValue(ClaimTypes.Role) is null)
@@ -56,6 +59,19 @@ public class SessionController(ITrainingSessionService sessionService) : Control
             TempData["SessionHandlerMessage"] = "Invalid session id, could not delete";
 
         TempData["SessionHandlerMessage"] = "Something went wrong, failed to delete";
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateSession(SessionPageViewModel viewModel)
+    {
+        if (viewModel.CreateSessionForm.EndTime < viewModel.CreateSessionForm.StartTime.AddMinutes(30))
+            ModelState.AddModelError("CreateSessionForm.EndTime", "End time must be atleast 30 minutes after start.");
+
+        if (!ModelState.IsValid)
+            return View(nameof(Index), viewModel);
+
+        TempData["create-session-message"] = "Session created successfully";
         return RedirectToAction(nameof(Index));
     }
 

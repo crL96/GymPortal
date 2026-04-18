@@ -1,0 +1,41 @@
+﻿@model SessionPageViewModel
+<section class="create-session-section">
+    <h2>Create New Session</h2>
+
+    <form id="create-session-form" method="post" asp-area="Admin" asp-controller="Session" asp-action="CreateSession"
+          novalidate>
+        <div class="form-group">
+            <label class="form-label" asp-for="CreateSessionForm.Name"></label>
+            <input class="form-input" asp-for="CreateSessionForm.Name" />
+            <span class="field-validation" asp-validation-for="CreateSessionForm.Name"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="CreateSessionForm.StartTime"></label>
+            <input class="form-input" asp-for="CreateSessionForm.StartTime" min="@DateTime.Now.Date" />
+            <span class="field-validation" asp-validation-for="CreateSessionForm.StartTime"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="CreateSessionForm.EndTime"></label>
+            <input class="form-input" asp-for="CreateSessionForm.EndTime" min="@DateTime.Now.Date" />
+            <span class="field-validation" asp-validation-for="CreateSessionForm.EndTime"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="CreateSessionForm.AvailableSpots"></label>
+            <input class="form-input" asp-for="CreateSessionForm.AvailableSpots" min="1" />
+            <span class="field-validation" asp-validation-for="CreateSessionForm.AvailableSpots"></span>
+        </div>
+
+        <div class="form-group submit">
+            <button class="btn" type="submit">Create</button>
+        </div>
+
+        <div asp-validation-summary="ModelOnly"></div>
+        @Html.AntiForgeryToken()
+
+        <span class="field-validation-error">@Model.CreateSessionForm.ErrorMessage</span>
+        @if (TempData["create-session-message"] is not null)
+        {
+            <p class="create-session-message">@TempData["create-session-message"]</p>
+        }
+    </form>
+</section>

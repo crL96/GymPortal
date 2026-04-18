@@ -1,4 +1,5 @@
-.session-handler-section {
+.session-handler-section,
+.create-session-section {
   background-color: var(--section-background-color);
   padding: 1rem 2rem 2rem;
   margin-bottom: 4rem;
@@ -12,7 +13,9 @@
     font-size: 2.5rem;
     margin: 0;
   }
+}
 
+.session-handler-section {
   .btn.delete {
     background-color: var(--danger-color);
     border-color: var(--danger-color);
@@ -60,5 +63,23 @@
     .form-input {
       margin: 0.5rem 0 1rem;
     }
+  }
+}
+
+.create-session-section {
+  form {
+    margin-top: 2rem;
+
+    .field-validation {
+      margin: 0.1rem 0 0.8rem;
+    }
+
+    .submit {
+      display: flex;
+    }
+  }
+
+  .create-session-message {
+    margin-bottom: 0;
   }
 }
