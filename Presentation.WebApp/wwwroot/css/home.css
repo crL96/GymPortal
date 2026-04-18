@@ -185,6 +185,36 @@
       @media (width >= 992px) {
         align-items: start;
       }
+
+      .description {
+        color: var(--gray-color);
+      }
+    }
+  }
+  .quote {
+    background-color: var(--section-background-color);
+    padding: 3rem 3rem;
+    border-radius: 20px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    margin: 2rem 0;
+
+    p {
+      margin: 0;
+    }
+
+    &::after {
+      content: "\f10e";
+      font-family: var(--font-fa);
+      font-weight: 900;
+      font-size: 8em;
+      position: absolute;
+      top: 50%;
+      right: 5%;
+      transform: translateY(-50%);
+      opacity: 0.1;
     }
   }
 }
