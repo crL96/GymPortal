@@ -1,4 +1,4 @@
-﻿<section class="header-section">
+﻿<section class="header-section" id="header-section">
     <a class="logotype" href="/"><img src="~/images/logotype.png" alt="CoreFitness"></a>
     <nav class="main-menu">
         <ul class="menu">
@@ -56,8 +56,10 @@
                     </a>
                 </li>
             }
+            <button id="mobile-menu-button" data-target="#mobile-menu-flyout" class="mobile-btn btn-accent"></button>
         </ul>
 
     </nav>
-    <button id="mobile-menu-button" data-target="#mobile-menu-flyout" class="mobile-btn btn-accent"></button>
 </section>
+
+<script src="~/js/menu.js" asp-append-version="true"></script>
