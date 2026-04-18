@@ -1,0 +1,57 @@
+﻿<script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+
+
+<script>
+    function setupCheckboxValidation({ formId, checkboxId, message }) {
+
+        const form = $(formId);
+        const checkbox = $(checkboxId);
+        const checkboxValidation = $(`[data-valmsg-for="${checkbox.attr("id")}"]`);
+
+        function setCheckboxError(message) {
+            checkbox.addClass("input-validation-error");
+            checkboxValidation
+                .removeClass("field-validation-valid")
+                .addClass("field-validation-error")
+                .text(message);
+        }
+
+        function clearCheckboxError() {
+            checkbox.removeClass("input-validation-error");
+            checkboxValidation
+                .removeClass("field-validation-error")
+                .addClass("field-validation-valid")
+                .text("");
+        }
+
+        function validateCheckbox() {
+            if (checkbox.is(":checked")) {
+                clearCheckboxError();
+                return true;
+            }
+
+            setCheckboxError(message);
+            return false;
+        }
+
+        checkbox.on("change", function () {
+            validateCheckbox();
+        });
+
+        form.on("submit", function (e) {
+            e.preventDefault();
+
+            const checkboxIsValid = validateCheckbox();
+
+            if (!checkboxIsValid) {
+                return;
+            }
+
+            clearCheckboxError();
+
+            this.submit();
+        });
+    }
+</script>
