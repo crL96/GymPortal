@@ -65,6 +65,9 @@ public class SessionController(ITrainingSessionService sessionService) : Control
     [HttpPost]
     public async Task<IActionResult> CreateSession(SessionPageViewModel viewModel)
     {
+        if (viewModel.CreateSessionForm.StartTime < DateTime.Now)
+            ModelState.AddModelError("CreateSessionForm.StartTime", "Start time cannot be in the past");
+
         if (viewModel.CreateSessionForm.EndTime < viewModel.CreateSessionForm.StartTime.AddMinutes(30))
             ModelState.AddModelError("CreateSessionForm.EndTime", "End time must be atleast 30 minutes after start.");
 

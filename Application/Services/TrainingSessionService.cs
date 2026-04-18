@@ -1,6 +1,7 @@
 using Application.Abstractions.Repositories.TrainingSessions;
 using Application.Abstractions.Services.TrainingSessions;
 using Application.Dtos.TrainingSessions;
+using Domain.Aggregates.TrainingSessions;
 using Domain.Aggregates.TrainingSessions.ValueObjects;
 using Domain.Common.Exceptions;
 
@@ -8,6 +9,28 @@ namespace Application.Services;
 
 public class TrainingSessionService(ITrainingSessionRepository sessionRepo) : ITrainingSessionService
 {
+    public async Task<CreateSessionResult> CreateSessionAsync(CreateSessionDto dto, string role, CancellationToken ct = default)
+    {
+        try
+        {
+            if (role != "Admin")
+                return CreateSessionResult.Failed("User is not an admin");
+
+            var session = TrainingSession.Create(dto.Name, dto.StartTime, dto.EndTime, dto.AvailableSpots);
+
+            var created = await sessionRepo.CreateAsync(session, ct);
+            if (created is null)
+                return CreateSessionResult.Failed("Failed to save session to database.");
+
+            return CreateSessionResult.Ok();
+        }
+        catch (DomainException ex)
+        {
+            return CreateSessionResult.Failed(ex.Message);
+        }
+
+    }
+
     public async Task<DeleteSessionResult> DeleteSessionAsync(Guid sessionId, string role, CancellationToken ct = default)
     {
         try
