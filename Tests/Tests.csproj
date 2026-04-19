@@ -30,6 +30,7 @@
     <Folder Include="Application\CustomerService\" />
     <Folder Include="Application\Faq\" />
     <Folder Include="Application\Memberships\" />
+    <Folder Include="Application\TrainingSessions\" />
     <Folder Include="Domain\" />
     <Folder Include="Domain\Bookings\" />
     <Folder Include="Domain\Memberships\" />
