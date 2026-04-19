@@ -25,18 +25,19 @@ public class BookingService(
 
             var trainingSessionId = TrainingSessionId.Recreate(sessionId);
 
-            var session = await sessionRepo.GetByIdAsync(trainingSessionId);
+            var session = await sessionRepo.GetByIdAsync(trainingSessionId, ct);
             if (session is null)
                 return BookingResult.NotFound("Session not found");
 
             var sessionBookings = await bookingRepo.GetBySessionId(trainingSessionId, ct);
+            sessionBookings ??= [];
             var bookedUserIds = sessionBookings.Select(x => x.UserId).ToList();
 
             var userMembership = await userMembershipRepo.GetByIdAsync(userId, ct);
 
             var booking = BookingPolicy.CreateBooking(session, userMembership, bookedUserIds);
 
-            var created = bookingRepo.CreateAsync(booking, ct);
+            var created = await bookingRepo.CreateAsync(booking, ct);
             return created is not null ?
                 BookingResult.Ok() :
                 BookingResult.Failed("Failed to save booking to database");
