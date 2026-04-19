@@ -11,7 +11,6 @@ public class FaqRepository(ApplicationDbContext context) : RepositoryBase<FaqIte
     {
         return new FaqEntity()
         {
-            Id = model.Id,
             Title = model.Title,
             Content = model.Content
         };

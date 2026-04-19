@@ -14,7 +14,6 @@ public class FaqSeeder
         List<FaqItem> faqItems =
         [
             FaqItem.Create(
-            1,
             "Do I need prior gym experience to Join CoreFitness?",
             """
             <p>No, CoreFitness is designed for all fitness levels. Our trainers guide beginners with proper techniques and structured workout plans to help them start safely and confidently.</p>
@@ -25,7 +24,6 @@ public class FaqSeeder
             """
             ),
             FaqItem.Create(
-                2,
                 "What facilities are included with the membership?",
                 """
                 <p>Your CoreFitness membership includes access to a wide range of modern training facilities designed to support all fitness goals.</p>
@@ -37,7 +35,6 @@ public class FaqSeeder
                 """
             ),
             FaqItem.Create(
-                3,
                 "Can I try the gym before taking a membership?",
                 """
                 <p>No, CoreFitness is designed for all fitness levels. Our trainers guide beginners with proper techniques and structured workout plans to help them start safely and confidently.</p>
@@ -48,7 +45,6 @@ public class FaqSeeder
                 """
             ),
             FaqItem.Create(
-                4,
                 "Are there group workout programs available?",
                 """
                 <p>Yes, we provide a variety of group workout programs suitable for different fitness levels and goals.</p>
@@ -60,7 +56,6 @@ public class FaqSeeder
                 """
             ),
             FaqItem.Create(
-                5,
                 "Is nutrition guidance included in the plans?",
                 """
                 <p>Yes, nutrition guidance can be included depending on your membership or training plan.</p>
@@ -73,10 +68,14 @@ public class FaqSeeder
             )
         ];
 
-        foreach (var item in faqItems)
+        var existing = await repo.GetAllAsync();
+        if (existing.ToList().Count == 0)
         {
-            if (await repo.GetByIdAsync(item.Id) is null)
+            foreach (var item in faqItems)
+            {
                 await repo.CreateAsync(item);
+            }
         }
+
     }
 }
