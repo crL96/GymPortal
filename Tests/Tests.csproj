@@ -25,4 +25,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\" />
+    <Folder Include="Domain\TrainingSessions\" />
+  </ItemGroup>
+
 </Project>
