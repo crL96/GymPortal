@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Tests.Infrastructure.Integration;
+namespace Tests.Infrastructure.Integration.Identity;
 
 public static class TestDbFactory
 {
