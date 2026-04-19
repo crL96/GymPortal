@@ -1,5 +1,6 @@
 using Application.Abstractions.Services.User;
 using Application.Dtos.User;
+using Domain.Common.Exceptions;
 using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Identity.Services;
@@ -17,8 +18,7 @@ public class IdentityUserService(UserManager<AppUser> userManager) : IUserServic
                 return UserResult.NotFound();
 
             if (user.Email is null)
-                //TODO - replace with domain exception
-                throw new Exception("User doesn't have a registered email adress");
+                throw new MissingEmailDomainException();
 
             var userDetails = new UserDetails(
                 user.Id,
