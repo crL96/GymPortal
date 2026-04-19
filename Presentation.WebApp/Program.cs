@@ -15,6 +15,7 @@ var app = builder.Build();
 
 app.UseHsts();
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseStatusCodePagesWithReExecute("/error/{0}");
 
