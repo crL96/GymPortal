@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\" />
+    <Folder Include="Domain\Memberships\" />
     <Folder Include="Domain\TrainingSessions\" />
   </ItemGroup>
 
