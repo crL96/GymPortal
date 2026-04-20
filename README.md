@@ -12,7 +12,13 @@ The main purpose of this project is educational. It was built to explore and pra
 
 The project also includes unit and integration testing using xUnit to validate core application logic and ensure reliability across key components.
 
+<div align="center">
+    <img width="640" alt="gymportal-preview" src="https://github.com/user-attachments/assets/c65d8295-0455-4095-b093-56ffdb462bf4" />
+</div>
+
 ## Getting Started
+
+Live demo: https://gymportal-crl96.azurewebsites.net/
 
 ### Run and build locally
 
