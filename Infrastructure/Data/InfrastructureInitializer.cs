@@ -17,7 +17,7 @@ public static class InfrastructureInitializer
         await MembershipSeeder.SeedDefaultMemberships(sp);
         await FaqSeeder.SeedDefaultFaq(sp);
 
-        if (env.IsDevelopment())
+        if (env.IsDevelopment() || env.IsEnvironment("Demo"))
         {
             await TrainingSessionSeeder.SeedDevSessions(sp);
         }

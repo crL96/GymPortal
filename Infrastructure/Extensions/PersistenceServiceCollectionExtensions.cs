@@ -24,9 +24,10 @@ public static class PersistenceServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(configuration);
         ArgumentNullException.ThrowIfNull(env);
 
-        if (env.IsDevelopment())
+        if (env.IsDevelopment() || env.IsEnvironment("Demo"))
         {
             Console.WriteLine("Using development database");
+            Console.WriteLine("Running in " + env.EnvironmentName + " mode");
 
             services.AddSingleton<SqliteConnection>(_ =>
             {

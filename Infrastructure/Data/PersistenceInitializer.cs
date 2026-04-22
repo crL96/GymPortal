@@ -20,7 +20,7 @@ internal static class PersistenceInitializer
         await using var scope = sp.CreateAsyncScope();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-        if (env.IsDevelopment())
+        if (env.IsDevelopment() || env.IsEnvironment("Demo"))
         {
             await context.Database.EnsureCreatedAsync();
         }
